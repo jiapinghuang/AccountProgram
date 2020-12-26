@@ -46,7 +46,30 @@ function checkSession(){
 function tool() {
   console.log('i am a tool function.');
 }
+//用户授权缓存数据
+function getUserInfo(t,e){
+   //本地存储
+   wx.setStorageSync('city',e.city),
+   wx.setStorageSync('nickName',e.nickName),
+   wx.setStorageSync('province',e.province),
+   wx.setStorageSync('avatarUrl',e.avatarUrl) 
+   SetUserDate(t)
+}
+//缓存数据更新到data
+function SetUserDate(t){ 
+  var that=t
+  var city=wx.getStorageSync('city')
+  var userName=wx.getStorageSync('nickName')
+  var avatarUrl=wx.getStorageSync('avatarUrl')
+  that.setData({
+      userCity:city,
+      userName:userName,
+      avatarUrl:avatarUrl
+  })
+}
 module.exports={
   checkSession:checkSession,
+  getUserInfo:getUserInfo,
+  SetUserDate:SetUserDate,
   tool:tool
 }

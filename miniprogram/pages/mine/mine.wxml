@@ -4,6 +4,6 @@
 <!-- <open-data type="groupName" open-gid="xxxxxx"></open-data>
 <open-data type="userAvatarUrl"></open-data>
 <open-data type="userGender" lang="zh_CN"></open-data> -->
-<view>姓名：{{nickName}}</view>
-<view>城市：{{city}}</view>
-<view>省份：{{province}}</view>
+<view>姓名：{{userName}}</view>
+<view>城市：{{userCity}}</view>
+<image src="{{avatarUrl}}"></image>
