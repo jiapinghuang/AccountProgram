@@ -1,9 +1,10 @@
-
+<view>1、微信授权，获取头像，姓名等</view>
+<view>2、我的——查询所有的记账数据、删除我的记账数据</view>
+<view>3、我的——扩展模块：新冠肺炎疫情监控模块</view>
 
 <button wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
-<!-- <open-data type="groupName" open-gid="xxxxxx"></open-data>
-<open-data type="userAvatarUrl"></open-data>
-<open-data type="userGender" lang="zh_CN"></open-data> -->
 <view>姓名：{{userName}}</view>
 <view>城市：{{userCity}}</view>
-<image src="{{avatarUrl}}"></image>
+<image src="{{avatarUrl}}">
+  
+</image>

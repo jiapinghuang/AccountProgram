@@ -32,7 +32,7 @@
       },
       {
         "pagePath": "pages/statistics/statistics",
-        "text": "统计",
+        "text": "图标",
         "iconPath": "pages/asset/tab/home.png",
         "selectedIconPath": "pages/asset/tab/home-active.png"
       },
