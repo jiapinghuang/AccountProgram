@@ -1,2 +1,5 @@
 <!--miniprogram/pages/count/count.wxml-->
 <text>记账：记账数据录入，可选择记账类型</text>
+<input class="weui-input" maxlength="20" placeholder="输入类型" />
+<input class="weui-input" maxlength="20" placeholder="输入金额" />
+<button bindtap="callAdd">添加</button>

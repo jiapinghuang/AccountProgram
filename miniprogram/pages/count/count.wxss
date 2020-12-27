@@ -1,1 +1,4 @@
 /* miniprogram/pages/count/count.wxss */
+input{
+  border:1rpx solid black;
+}
