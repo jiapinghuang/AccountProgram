@@ -5,6 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+      type:'',
+      money:null
 
   },
 
@@ -14,9 +16,39 @@ Page({
   onLoad: function (options) {
     // var value = wx.getStorageSync('openid')
     // console.log("openid:",value)
+    console.log(options)
+  },
+  //当输入框发生改变时，获取值。
+  typeInputChangeHandle:function(e){
+    this.setData({
+      type:e.detail.value
+    })
+  },
+  moneyInputChangeHandle:function(e){
+    this.setData({
+      money:e.detail.value
+    })
   },
   callAdd:function(){
-    console.log("点击了")
+    var type=this.data.type
+    var money=this.data.money
+    if(!type||!money){
+        console.log("请输入内容")
+    }else{
+      console.log("触发云函数")
+      //  wx.cloud.callFunction({
+      //   // 云函数名称
+      //   name: 'add',
+      //   // 传给云函数的参数
+      //   data: {
+      //     type:type,
+      //     money:money
+      //   },
+      //   complete: res => {
+      //     console.log('callFunction test result: ', res)
+      //   }
+      // })
+   }
    
   },
   /**
