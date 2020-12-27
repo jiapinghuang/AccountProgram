@@ -1,3 +1,4 @@
+//图表工具类
 let util = {
     toFixed: function (num, limit) {
         limit = limit || 2;
