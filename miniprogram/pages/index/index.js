@@ -1,20 +1,30 @@
 // miniprogram/pages/index/index.js
 const util=require('../util/checkLogin.js')
+const days = []
+for (let i = 1; i <= 31; i++) {
+  days.push(i)
+}
 Page({
 
   /**
    * 页面的初始数据
    */
-  data: {
-
-  },
   
+  data: {
+    date:""
+  }
+  ,
+  bindDateChange: function(e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      date: e.detail.value
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var value = wx.getStorageSync('openid')
-    console.log("openid:",value)
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

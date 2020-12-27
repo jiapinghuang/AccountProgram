@@ -6,10 +6,15 @@ Page({
    */
   data: {
       type:'',
-      money:null
-
+      money:null,
+      date:""
   },
-
+  bindDateChange: function(e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      date: e.detail.value
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -32,6 +37,7 @@ Page({
   callAdd:function(){
     var type=this.data.type
     var money=this.data.money
+    
     if(!type||!money){
         console.log("请输入内容")
     }else{
@@ -48,6 +54,10 @@ Page({
       //     console.log('callFunction test result: ', res)
       //   }
       // })
+      this.setData({
+        type:"",
+        money:""
+      })
    }
    
   },
