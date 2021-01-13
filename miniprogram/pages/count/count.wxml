@@ -3,10 +3,13 @@
 <input class="weui-input" maxlength="20" placeholder="输入类型" bindchange="typeInputChangeHandle" value="{{type}}"/>
 <input class="weui-input" maxlength="20" placeholder="输入金额" bindchange="moneyInputChangeHandle" value="{{money}}"/>
 <view class="section">
-  <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+  <picker mode="date" value="{{acoutDate}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
     <view class="picker">
-      日期: {{date}}
+      日期: {{acountDate}}
     </view>
   </picker>
 </view>
 <button bindtap="callAdd">添加</button>
+<button bindtap="test">测试数据</button>
+
+

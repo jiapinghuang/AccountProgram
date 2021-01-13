@@ -2,3 +2,6 @@
 input{
   border:1rpx solid black;
 }
+button{
+  margin-bottom: 10px;
+}

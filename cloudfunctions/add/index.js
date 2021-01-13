@@ -12,7 +12,8 @@ exports.main = async (event, context) => {
   return await db.collection('Account').add({
     data: {
       type: event.type,
-      money: event.money
+      money: event.money,
+      acoutDate:event.acountDate
     }
   })
   

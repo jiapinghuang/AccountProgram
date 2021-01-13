@@ -7,13 +7,17 @@ Page({
   data: {
       type:'',
       money:null,
-      date:""
+      acountDate:''
   },
   bindDateChange: function(e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
-      date: e.detail.value
+      acountDate: e.detail.value
     })
+  },
+  test:function(){
+    console.log(this)
+    console.log("----",this.data.acountDate)
   },
   /**
    * 生命周期函数--监听页面加载
@@ -37,26 +41,28 @@ Page({
   callAdd:function(){
     var type=this.data.type
     var money=this.data.money
-    
-    if(!type||!money){
-        console.log("请输入内容")
+    var acountDate=this.data.acountDate
+    if(!type||!money||!acountDate){
+        console.log("至少有一项为空值")
     }else{
       console.log("触发云函数")
-      //  wx.cloud.callFunction({
-      //   // 云函数名称
-      //   name: 'add',
-      //   // 传给云函数的参数
-      //   data: {
-      //     type:type,
-      //     money:money
-      //   },
-      //   complete: res => {
-      //     console.log('callFunction test result: ', res)
-      //   }
-      // })
+       wx.cloud.callFunction({
+        // 云函数名称
+        name: 'add',
+        // 传给云函数的参数
+        data: {
+          type:type,
+          money:money,
+          acountDate:acountDate
+        },
+        complete: res => {
+          console.log('callFunction test result: ', res)
+        }
+      })
       this.setData({
         type:"",
-        money:""
+        money:"",
+        acoutDate:""
       })
    }
    
