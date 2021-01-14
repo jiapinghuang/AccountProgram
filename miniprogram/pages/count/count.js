@@ -14,16 +14,21 @@ Page({
       //时间控件变量
       ,date: '',
       show: false,
-
-      //单选框变量
-   //   radio: 'I',
       //类目
-      catorage:['教育','美容','交通','投资','教育','美容','交通','投资']
-      
+      catorage:['教育','美容','交通','投资','教育','美容','交通','投资'],
+      option1: [
+        { text: '教育', value: '教育' },
+        { text: '交通', value: '交通' },
+        { text: '服饰', value: '服饰' },
+      ],
+      value1: '教育'      
   },
-  //类目点击
-  clickItem:function(e){
-    console.log(e)
+  //类目切换时
+  itemChange(event){
+    var n=event.detail
+    this.setData({
+      item_name:n
+    })
   },
   //单选框的
   onRadioChange(event) {
@@ -60,22 +65,17 @@ Page({
   onLoad: function (options) {
     // var value = wx.getStorageSync('openid')
     // console.log("openid:",value)
-    console.log(options)
+   // console.log(options)
   },
-  //当输入框发生改变时，获取值。
-  itemNameInputChangeHandle:function(e){
-    this.setData({
-      item_name:e.detail.value
-    })
-  },
+  //金额变化时
   onMoneyChange:function(event){
-    //console.log(event.currentTarget.dataset)
      var m=event.detail
      console.log(m)
      this.setData({
       money:m
     })
   },
+  //备注变化时
   onDescChange:function(event){
     var d=event.detail
     console.log(d)
@@ -83,6 +83,7 @@ Page({
      desc:d
    })
   },
+  //新增方法
   callAdd:function(){
     var item_name=this.data.item_name
     var money=this.data.money
@@ -112,7 +113,7 @@ Page({
             money:"",
             addDate:"",
             desc:'',
-            desc:''
+            item_name:'教育'
           })
         }
       })

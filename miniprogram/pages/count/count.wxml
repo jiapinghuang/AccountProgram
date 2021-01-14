@@ -1,10 +1,10 @@
 
 <!-- <text>记账：记账数据录入，可选择记账类型</text> -->
-<van-grid  column-num="3" border="{{ true }}">
-  <van-grid-item use-slot wx:for="{{ 6 }}" wx:for-item="index" bind:click="clickItem">
-    <text>美容</text>
-  </van-grid-item>
-</van-grid>
+
+<van-dropdown-menu >
+  <van-dropdown-item title="记账类目" value="{{ value1 }}" options="{{ option1 }}"
+  bind:change="itemChange"/>
+</van-dropdown-menu>
 <van-cell-group icon-size="14px">
   <van-field label="金额"
     value="{{ value }}"
