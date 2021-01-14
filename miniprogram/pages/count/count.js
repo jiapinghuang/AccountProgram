@@ -14,6 +14,8 @@ Page({
       //时间控件变量
       ,date: '',
       show: false,
+      minDate: new Date(2020, 11, 1).getTime(),
+      defaultDate:new Date().getTime(),
       //类目
       catorage:['教育','美容','交通','投资','教育','美容','交通','投资'],
       option1: [
@@ -109,7 +111,7 @@ Page({
         complete: res => {
           console.log('callFunction test result: ', res)
           this.setData({
-            item_type:"",
+            item_type:"I",
             money:"",
             addDate:"",
             desc:'',

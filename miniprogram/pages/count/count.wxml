@@ -19,8 +19,10 @@
     border="{{ true }}"
     bind:change="onDescChange"
   />
-  <van-cell title="日期" value="{{ date }}" bind:click="onDisplay" />
-  <van-calendar show="{{ show }}" bind:close="onClose" bind:confirm="onConfirm" />
+  <van-cell title="日期" value="{{ addDate }}" bind:click="onDisplay" />
+  <van-calendar show="{{ show }}" bind:close="onClose" bind:confirm="onConfirm"
+  min-date="{{ minDate }}" default-date='{{defaultDate}}'
+  />
   <van-radio-group value="{{ item_type }}" bind:change="onRadioChange">
     <van-cell-group>
       <van-cell title="收入" clickable data-name="I" bind:click="onRadioClick">
