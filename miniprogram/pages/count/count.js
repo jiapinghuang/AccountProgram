@@ -17,13 +17,10 @@ Page({
       minDate: new Date(2020, 11, 1).getTime(),
       defaultDate:new Date().getTime(),
       //类目
-      catorage:['教育','美容','交通','投资','教育','美容','交通','投资'],
       option1: [
-        { text: '教育', value: '教育' },
-        { text: '交通', value: '交通' },
-        { text: '服饰', value: '服饰' },
+       
       ],
-      value1: '教育'      
+      value1: ''      
   },
   //类目切换时
   itemChange(event){
@@ -66,8 +63,24 @@ Page({
    */
   onLoad: function (options) {
     // var value = wx.getStorageSync('openid')
-    // console.log("openid:",value)
-   // console.log(options)
+    this.callGetItemType()
+        
+  },
+  //获取数据库类目
+  callGetItemType:function(){
+    wx.cloud.callFunction({
+      // 云函数名称
+      name: 'GetItemType',
+      complete: res => {
+        console.log('callFunction test result: ', res.result.data)
+        var v=res.result.data[0].text
+        this.setData({
+          option1:res.result.data,
+          value1:v
+        })
+      }
+    })
+    
   },
   //金额变化时
   onMoneyChange:function(event){
