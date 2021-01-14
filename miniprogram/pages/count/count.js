@@ -1,4 +1,5 @@
 // miniprogram/pages/count/count.js
+const dateUtil=require('../util/Date.js')
 Page({
 
   /**
@@ -50,7 +51,9 @@ Page({
   },
   formatDate(date) {
     date = new Date(date);  
-    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    var m=date.getMonth() + 1
+    var d=date.getDate()
+    return `${date.getFullYear()}-${dateUtil.changeNum(m)}-${dateUtil.changeNum(d)}`;
   },
   onConfirm(event) {
     this.setData({

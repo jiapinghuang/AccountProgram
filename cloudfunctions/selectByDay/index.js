@@ -8,7 +8,6 @@ const _ = db.command
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
   //按天查询当天信息
-  var addDate='2021-01-13' 
   return await db.collection('Account').where({
     addDate:event.addDate //字符串
   })

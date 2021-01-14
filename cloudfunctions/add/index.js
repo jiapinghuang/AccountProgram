@@ -15,7 +15,7 @@ exports.main = async (event, context) => {
       money: event.money,  
       desc:event.desc,
       item_type:event.item_type,
-      addDate:event.acountDate,
+      addDate:event.addDate,
       openid: wxContext.OPENID,
       del:false
     }

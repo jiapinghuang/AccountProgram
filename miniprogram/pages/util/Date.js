@@ -15,7 +15,16 @@ function changeNum(num){
   }
   return res
 }
+function limitCurrentDay(){
+  var date = new Date();
+  var year = date.getFullYear();
+  var month = date.getMonth()+1;
+  var d = new Date(year, month, 0);
+  var str=year+'-'+month+'-'+d;
+  return str;
+}
 module.exports={
   GetCurrentDate:GetCurrentDate,
-  changeNum:changeNum
+  changeNum:changeNum,
+  limitCurrentDay:limitCurrentDay
 }
