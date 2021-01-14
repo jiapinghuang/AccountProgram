@@ -1,0 +1,16 @@
+{
+  "name": "vant-weapp-demo",
+  "version": "1.0.0",
+  "description": "Collection of vant-weapp demos.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@miniprogram-component-plus/col": "^1.0.0",
+    "@miniprogram-component-plus/row": "^1.0.0",
+    "@vant/weapp": "^1.0.0"
+  }
+}

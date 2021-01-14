@@ -11,9 +11,13 @@ exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
   return await db.collection('Account').add({
     data: {
-      type: event.type,
-      money: event.money,
-      acoutDate:event.acountDate
+      item_name: event.item_name,
+      money: event.money,  
+      desc:event.desc,
+      item_type:event.item_type,
+      addDate:event.acountDate,
+      openid: wxContext.OPENID,
+      del:false
     }
   })
   

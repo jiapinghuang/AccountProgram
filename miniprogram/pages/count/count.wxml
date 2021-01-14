@@ -1,15 +1,37 @@
-<!--miniprogram/pages/count/count.wxml-->
-<text>记账：记账数据录入，可选择记账类型</text>
-<input class="weui-input" maxlength="20" placeholder="输入类型" bindchange="typeInputChangeHandle" value="{{type}}"/>
-<input class="weui-input" maxlength="20" placeholder="输入金额" bindchange="moneyInputChangeHandle" value="{{money}}"/>
-<view class="section">
-  <picker mode="date" value="{{acoutDate}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
-    <view class="picker">
-      日期: {{acountDate}}
-    </view>
-  </picker>
-</view>
-<button bindtap="callAdd">添加</button>
-<button bindtap="test">测试数据</button>
 
+<!-- <text>记账：记账数据录入，可选择记账类型</text> -->
+<van-grid  column-num="3" border="{{ true }}">
+  <van-grid-item use-slot wx:for="{{ 6 }}" wx:for-item="index" bind:click="clickItem">
+    <text>美容</text>
+  </van-grid-item>
+</van-grid>
+<van-cell-group icon-size="14px">
+  <van-field label="金额"
+    value="{{ value }}"
+    placeholder="请输入金额"
+    border="{{ true }}"
+    bind:change="onMoneyChange"
+    data-money="{{money}}"
+  />
+  <van-field label="备注"
+    value="{{ value }}"
+    placeholder="备注"
+    border="{{ true }}"
+    bind:change="onDescChange"
+  />
+  <van-cell title="日期" value="{{ date }}" bind:click="onDisplay" />
+  <van-calendar show="{{ show }}" bind:close="onClose" bind:confirm="onConfirm" />
+  <van-radio-group value="{{ item_type }}" bind:change="onRadioChange">
+    <van-cell-group>
+      <van-cell title="收入" clickable data-name="I" bind:click="onRadioClick">
+        <van-radio slot="right-icon" name="I" />
+      </van-cell>
+      <van-cell title="支出" clickable data-name="O" bind:click="onRadioClick">
+        <van-radio slot="right-icon" name="O" />
+      </van-cell>
+    </van-cell-group>
+  </van-radio-group>
+</van-cell-group>
+
+ <van-button type="primary" block bind:click="callAdd">添加</van-button>
 

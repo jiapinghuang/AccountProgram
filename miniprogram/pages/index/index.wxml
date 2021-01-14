@@ -1,6 +1,6 @@
 <!--miniprogram/pages/index/index.wxml-->
 <text>首页：统计当月收入支出的记账数据，可切换当月每日收支记账数据</text>
-<text>固定当月，可选择天数</text>
+<text>固定当月，可选择天数 Y</text>
 <view class="section">
   <view class="section__title">日期选择器</view>
   <picker mode="date" value="{{date}}" fields="day" start="2015-09-01" end="2024-09-01" bindchange="bindDateChange">
@@ -10,5 +10,23 @@
   </picker>
 </view>
 
------------测试代码--------------
+-----------固定年月，可选择天数--------------
 
+<view>
+  <view>{{year}}年{{month}}月{{day}}日</view>
+  <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange">
+    <picker-view-column> 
+      <view wx:for="{{years}}" style="line-height: 50px">{{item}}年</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{months}}" style="line-height: 50px">{{item}}月</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{days}}" style="line-height: 50px">{{item}}日</view>
+    </picker-view-column>
+  </picker-view>
+</view>
+
+<button bindtap="callSelectAccount">按天查询账本</button>
+
+<button bindtap="">统计当月收入：</button>
