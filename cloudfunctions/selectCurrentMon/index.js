@@ -8,8 +8,9 @@ const _ = db.command
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
   //按月查询信息
+  console.log(event.minDate)
   return await db.collection('Account').where({
-    //addDate: _.gte(event.minDate).and(_.lte(event.maxdDate)) //大于 小于
+    addDate: _.gte(event.minDate).and(_.lte(event.maxDate)) //大于 小于
   })
   .get({
     success: function(res) {

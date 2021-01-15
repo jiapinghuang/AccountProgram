@@ -41,11 +41,33 @@ Page({
       }
     })
   },
+  callSelectCurrentMon:function(){
+    var minDate=dateUtil.formatDate(this.data.minDate)
+    var maxDate=dateUtil.formatDate(this.data.maxDate)
+    console.log(minDate)
+    wx.cloud.callFunction({
+      // 云函数名称
+      name: 'selectCurrentMon',
+      // 传给云函数的参数
+      data: {
+        //一个月的范围
+        minDate:parseInt(minDate),
+        maxDate:parseInt(maxDate) 
+      },
+      complete: res => {
+        console.log('callFunction test result: ', res)
+      }
+    })
+  },
+  test:function() {
+    this.callSelectCurrentMon()
+  },
    /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     //this.callSelectAccount()
+   console.log(dateUtil.formatDate(new Date(2010, 0, 1).getTime())) 
   },
     /**
    * 生命周期函数--监听页面显示
