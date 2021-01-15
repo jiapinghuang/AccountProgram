@@ -3,6 +3,7 @@ const dateUtil=require('../util/Date.js')
 const date = new Date();
 const year = date.getFullYear();
 const month = date.getMonth()+1;
+import Notify from '@vant/weapp/notify/notify';
 Page({
 
   /**
@@ -75,7 +76,8 @@ Page({
         var v=res.result.data[0].text
         this.setData({
           option1:res.result.data,
-          value1:v
+          value1:v,
+          item_name:v
         })
       }
     })
@@ -108,29 +110,27 @@ Page({
     if(!item_name||!money||!addDate||!desc){
         console.log("至少有一项为空值")
     }else{
-      console.log("触发云函数")
-       wx.cloud.callFunction({
-        // 云函数名称
-        name: 'add',
-        // 传给云函数的参数
-        data: {
-          item_type:item_type,
-          money:money,
-          addDate:addDate,
-          desc:desc,
-          item_name:item_name
-        },
-        complete: res => {
-          console.log('callFunction test result: ', res)
-          this.setData({
-            item_type:"I",
-            money:"",
-            addDate:"",
-            desc:'',
-            item_name:'教育'
-          })
-        }
-      })
+      try{
+        wx.cloud.callFunction({
+          // 云函数名称
+          name: 'add',
+          // 传给云函数的参数
+          data: {
+            item_type:item_type,
+            money:money,
+            addDate:addDate,
+            desc:desc,
+            item_name:item_name
+          },
+          complete: res => {
+            console.log('callFunction test result: ', res)
+            Notify({ type: 'success', message: '添加成功' })
+          }
+        })
+      }catch(err){
+        Notify({ type: 'danger', message: '添加失败，请联系管理员' })
+      }
+      
       
    }
    

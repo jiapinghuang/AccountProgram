@@ -1,17 +1,16 @@
-<!--miniprogram/pages/statistics/statistics.wxml-->
-<view>1、统计所有收入支出的数据，可根据日期（年月日）分段筛选记账数据</view>
+<!-- <view>1、统计所有收入支出的数据，可根据日期（年月日）分段筛选记账数据</view>
 <view>2、数据可视化显示：饼状图分块统计记账数据</view>
 <view>3、统计每种记账类型的总金额和总笔数据</view>
-<view>4、查看每种类型的详细数据</view>
+<view>4、查看每种类型的详细数据</view> -->
 
-<view class="mycontainer">
+<!-- <view class="mycontainer">
   <canvas canvas-id="feiyu1" class="canvas"></canvas>
-</view>
-<view class="mycontainer">
+</view> -->
+<!-- <view class="mycontainer">
   <canvas canvas-id="feiyu2" class="canvas"></canvas>
-</view>
-<view class="mycontainer">
+</view> -->
+<!-- <view class="mycontainer">
   <canvas canvas-id="feiyu3" class="canvas"></canvas>
-</view>
+</view> -->
 
 
