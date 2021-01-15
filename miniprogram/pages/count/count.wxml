@@ -21,7 +21,7 @@
   />
   <van-cell title="日期" value="{{ addDate }}" bind:click="onDisplay" />
   <van-calendar show="{{ show }}" bind:close="onClose" bind:confirm="onConfirm"
-  min-date="{{ minDate }}" default-date='{{defaultDate}}'
+  min-date="{{ minDate }}" default-date='{{defaultDate}}' max-date="{{maxDate}}"
   />
   <van-radio-group value="{{ item_type }}" bind:change="onRadioChange">
     <van-cell-group>

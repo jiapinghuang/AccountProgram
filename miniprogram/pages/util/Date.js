@@ -15,14 +15,19 @@ function changeNum(num){
   }
   return res
 }
-var date = new Date();
-var year = date.getFullYear();
-var month = date.getMonth()+1;
-var countday=GetCurrentDate()
-var minDate=new Date(year, month-1, 1).getTime()
-var maxDate=new Date(year, month-1, countday).getTime()
 var currentDate=getCurrentDate("currentDate")
 var selectDate=getCurrentDate("selectDate")
+//传入年、月获得最小日期
+function getMinDate(y,m) {
+   var date=new Date(y, m-1, 1).getTime()
+   return date
+}
+//传入年、月获得最大日期
+function getMaxDate(y,m) {
+  var d = new Date(y, m, 0);
+  var date=new Date(y, m-1, d.getDate()).getTime()
+  return date
+}
 
 function getCurrentDate(type){
   var date = new Date();
@@ -57,9 +62,9 @@ function formatDate(date){
 module.exports={
   GetCurrentDate:GetCurrentDate,
   changeNum:changeNum,
-  minDate:minDate,
-  maxDate:maxDate,
   selectDate:selectDate,
   formatDate:formatDate,
-  currentDate:currentDate
+  currentDate:currentDate,
+  getMinDate:getMinDate,
+  getMaxDate:getMaxDate
 }

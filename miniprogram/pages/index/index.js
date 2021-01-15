@@ -1,14 +1,17 @@
 // miniprogram/pages/index/index.js
 const util=require('../util/checkLogin.js')
 const dateUtil=require('../util/Date.js')
+const date = new Date();
+const year = date.getFullYear();
+const month = date.getMonth()+1;
 Page({
   /**
    * 页面的初始数据
    */
   data: {
     defaultDate:dateUtil.currentDate,
-    minDate:dateUtil.minDate,
-    maxDate:dateUtil.maxDate,
+    minDate:dateUtil.getMinDate(year,month),
+    maxDate:dateUtil.getMaxDate(year,month),
     selectDate:dateUtil.selectDate
   },
   //日期开始
@@ -45,22 +48,22 @@ Page({
     var minDate=dateUtil.formatDate(this.data.minDate)
     var maxDate=dateUtil.formatDate(this.data.maxDate)
     console.log(minDate)
-    wx.cloud.callFunction({
-      // 云函数名称
-      name: 'selectCurrentMon',
-      // 传给云函数的参数
-      data: {
-        //一个月的范围
-        minDate:parseInt(minDate),
-        maxDate:parseInt(maxDate) 
-      },
-      complete: res => {
-        console.log('callFunction test result: ', res)
-      }
-    })
+    // wx.cloud.callFunction({
+    //   // 云函数名称
+    //   name: 'selectCurrentMon',
+    //   // 传给云函数的参数
+    //   data: {
+    //     //一个月的范围
+    //     minDate:parseInt(minDate),
+    //     maxDate:parseInt(maxDate) 
+    //   },
+    //   complete: res => {
+    //     console.log('callFunction test result: ', res)
+    //   }
+    // })
   },
   test:function() {
-    this.callSelectCurrentMon()
+   // this.callSelectCurrentMon()
   },
    /**
    * 生命周期函数--监听页面加载

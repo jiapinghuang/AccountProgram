@@ -1,5 +1,8 @@
 // miniprogram/pages/count/count.js
 const dateUtil=require('../util/Date.js')
+const date = new Date();
+const year = date.getFullYear();
+const month = date.getMonth()+1;
 Page({
 
   /**
@@ -7,20 +10,19 @@ Page({
    */
   data:{
       item_type:'I',
-      desc:'无',//备注
-      item_name:'教育',//类目名称
+      desc:'',//备注
+      item_name:'',//类目名称
       money:null,
       addDate:''//添加时间
 
       //时间控件变量
       ,date: '',
       show: false,
-      minDate: new Date(2020, 11, 1).getTime(),
+      minDate:dateUtil.getMinDate(year,month-2),
       defaultDate:new Date().getTime(),
+      maxDate:new Date().getTime(),
       //类目
-      option1: [
-       
-      ],
+      option1: [],
       value1: ''      
   },
   //类目切换时
@@ -49,17 +51,10 @@ Page({
   onClose() {
     this.setData({ show: false });
   },
-  formatDate(date) {
-    date = new Date(date);  
-    var m=date.getMonth() + 1
-    var d=date.getDate()
-    var dd=`${date.getFullYear()}${dateUtil.changeNum(m)}${dateUtil.changeNum(d)}`;
-    return parseInt(dd);
-  },
   onConfirm(event) {
     this.setData({
       show: false,
-      addDate: this.formatDate(event.detail),
+      addDate: dateUtil.formatDate(event.detail),
     });
   },
   /**
