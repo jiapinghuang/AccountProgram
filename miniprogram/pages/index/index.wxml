@@ -1,12 +1,12 @@
 
-<view class="count">
-  <view class="count_v">
+<view class="item_container">
+  <view class="item">
     <view>本月收入</view>
-    <view>8888</view>
+    <view>{{IMmoney}}</view>
   </view>
-  <view class="count_v">
+  <view class="item">
     <view>本月支出</view>
-    <view>666</view>
+    <view>{{OMmoney}}</view>
   </view>
 </view>
 
@@ -14,22 +14,38 @@
   <van-calendar show="{{ show }}" bind:close="onClose" bind:confirm="onConfirm"
   min-date="{{ minDate }}" default-date='{{defaultDate}}' max-date='{{maxDate}}'
   />
+
+
 <view>
-  <view>{{selectDate}} | 收入:22  |支出：50</view>
-  <view>
-    <view>
-       <text>衣服</text>
-       <text>-50</text>
+  <view class="item_container">
+    <view class="item">
+      <view class="item_1">{{selectDate}}</view> 
+      <view class="item_1">总收入:{{IDmoney}}</view>
+      <view class="item_1">总支出:{{ODmoney}}</view>
     </view>
-    <view>
-       <text>教育</text>
-       <text>-50</text>
-    </view>
-    <view>
-       <text>交通</text>
-       <text>50</text>
+   
+  </view>
+  <view wx:for="{{IaccountDetail}}" class="item_container">
+    <view class="item">
+      <view class="item_1">{{item.item_name}}</view>
+      <view class="item_1">{{item.money}}</view>
     </view>
   </view>
-</view>
+  <view class="item_container" wx:for="{{OaccountDetail}}">
+    <view class="item">
+       <view class="item_1">{{item.item_name}}</view>
+       <view class="item_1 O">{{item.money}}</view>
+    </view>
+  </view>
 
-<button bindtap="test">call-当月份总收入</button>
+  <!-- <view class="item_container">
+    <view class="item">
+       <view class="item_1">美容</view>
+       <view class="item_1">390</view>
+    </view>
+  </view> -->
+</view>
+<view class="item_container" wx:if="{{IaccountDetail==false & OaccountDetail==false}}">
+      <view class="item item_1">当天没有任何记录~</view>
+</view>
+<!-- <button bindtap="test">call-当月份总收入</button> -->
