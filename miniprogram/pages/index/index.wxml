@@ -1,27 +1,35 @@
-<!--miniprogram/pages/index/index.wxml-->
-<text>首页：统计当月收入支出的记账数据，可切换当月每日收支记账数据</text>
-<text>固定当月，可选择天数 Y</text>
 
-<!-- <view>
-  <view>{{year}}年{{month}}月{{day}}日</view>
-  <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange">
-    <picker-view-column> 
-      <view wx:for="{{years}}" style="line-height: 50px">{{item}}年</view>
-    </picker-view-column>
-    <picker-view-column>
-      <view wx:for="{{months}}" style="line-height: 50px">{{item}}月</view>
-    </picker-view-column>
-    <picker-view-column>
-      <view wx:for="{{days}}" style="line-height: 50px">{{item}}日</view>
-    </picker-view-column>
-  </picker-view>
-</view> -->
+<view class="count">
+  <view class="count_v">
+    <view>本月收入</view>
+    <view>8888</view>
+  </view>
+  <view class="count_v">
+    <view>本月支出</view>
+    <view>666</view>
+  </view>
+</view>
 
-<van-cell title="日期" value="{{ selectDate }}" bind:click="onDisplay" />
+<van-cell title="按日期" value="{{ selectDate }}" bind:click="onDisplay" />
   <van-calendar show="{{ show }}" bind:close="onClose" bind:confirm="onConfirm"
   min-date="{{ minDate }}" default-date='{{defaultDate}}' max-date='{{maxDate}}'
   />
+<view>
+  <view>{{selectDate}} | 收入:22  |支出：50</view>
+  <view>
+    <view>
+       <text>衣服</text>
+       <text>-50</text>
+    </view>
+    <view>
+       <text>教育</text>
+       <text>-50</text>
+    </view>
+    <view>
+       <text>交通</text>
+       <text>50</text>
+    </view>
+  </view>
+</view>
 
-<button bindtap="callSelectAccount">按天查询账本</button>
-
-<!-- <button bindtap="">统计当月收入：</button> -->
+<button bindtap="test">测试1月份</button>

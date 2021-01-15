@@ -1,4 +1,16 @@
 /* miniprogram/pages/index/index.wxss */
-button{
-  margin-bottom: 10px;
+.count{
+  height: 150rpx;
+  background-color:green; 
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+  color: white;
+}
+.count_v{ 
+  margin-top: 30rpx;
+  width: 50%;
+  height: 150rpx;
+  border-right: 1rpx solid #f5f5f5;
 }

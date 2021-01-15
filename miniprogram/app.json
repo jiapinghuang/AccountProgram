@@ -17,13 +17,13 @@
     "selectedColor": "#444",
     "backgroundColor": "#fff",
     "borderStyle": "black",
-    "list": [
+    "list": [  
       {
         "pagePath": "pages/index/index",
         "text": "首页",
         "iconPath": "pages/asset/tab/home.png",
         "selectedIconPath": "pages/asset/tab/home-active.png"
-      },
+      },  
       {
         "pagePath": "pages/count/count",
         "text": "记账",

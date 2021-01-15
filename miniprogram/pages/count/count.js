@@ -53,7 +53,8 @@ Page({
     date = new Date(date);  
     var m=date.getMonth() + 1
     var d=date.getDate()
-    return `${date.getFullYear()}-${dateUtil.changeNum(m)}-${dateUtil.changeNum(d)}`;
+    var dd=`${date.getFullYear()}${dateUtil.changeNum(m)}${dateUtil.changeNum(d)}`;
+    return parseInt(dd);
   },
   onConfirm(event) {
     this.setData({
@@ -105,7 +106,7 @@ Page({
   callAdd:function(){
     var item_name=this.data.item_name
     var money=this.data.money
-    var addDate=this.data.addDate
+    var addDate=this.data.addDate 
     var desc=this.data.desc
     var item_type=this.data.item_type
     console.log(item_name)
