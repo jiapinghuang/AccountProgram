@@ -8,7 +8,7 @@ function drawRect(obj){
     //画图开始
     let sum=0;
     let now=0;
-    let cx=180,cy=80,r=40;
+    let cx=180,cy=60,r=50;
     obj.forEach(data=>{
         sum+=data.data;
     })
@@ -19,12 +19,14 @@ function drawRect(obj){
       
       //添加名字
       let mid=(now+now+ang)/2;//取每一块扇图的中间位置为字体的坐标
-      let x = cx + r*Math.cos(d2a(mid)), y = cy + r*Math.sin(d2a(mid));//算出字体的x、y坐标
+      let x = cx + r*Math.cos(a2d(mid)), y = cy + r*Math.sin(a2d(mid));//算出字体的x、y坐标
       ctx.font='bold 12px 宋体';//添加字体
+      
+
       if(mid<180){//如果小于180°就让坐标大一点，文字往下走
-        ctx.fillText(d.name,x+40,y+40);
+        ctx.fillText(d.name,x-30,y-30);
       }else{//如果大于180°就让坐标小一点，文字往上走
-        ctx.fillText(d.name,x-40,y-40);
+        ctx.fillText(d.name,x+30,y+40);
       }     
       now+=ang;//更新now
     })
