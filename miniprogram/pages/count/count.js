@@ -106,6 +106,9 @@ Page({
     var addDate=this.data.addDate 
     var desc=this.data.desc
     var item_type=this.data.item_type
+    if(item_type==='O'){
+      money='-'+money
+    }
     console.log(item_name)
     if(!item_name||!money||!addDate||!desc){
         console.log("至少有一项为空值")

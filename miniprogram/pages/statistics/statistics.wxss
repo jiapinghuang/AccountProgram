@@ -1,14 +1,7 @@
 /* miniprogram/pages/statistics/statistics.wxss */
-.canvas {
-  width: 750rpx;
-  height: 500rpx;
-}
 .mycontainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 30rpx 0;
-  box-sizing: border-box;
+  
+  padding: 30rpx 0rpx;
+   box-sizing: border-box;
 } 
 
