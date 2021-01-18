@@ -13,14 +13,17 @@ function GroupByArr(groupArr,column_name){
   {
       var newArr=[]
       let count=0
+      let sum=0 //总笔数
       groupArr.map(function(item){
         if(item[column_name]===sArr[i]){
           count+=parseInt(item.money);
-          newArr.push(item) 
+          newArr.push(item)
+          sum++
         }      
       })
-      arr.push({"key":sArr[i],"value":newArr,count:count})
+      arr.push({"index":i,"key":sArr[i],"value":newArr,count:count,sum:sum})
       count=0
+      sum=0
   } 
  return arr
 }

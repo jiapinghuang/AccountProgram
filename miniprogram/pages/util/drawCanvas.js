@@ -24,9 +24,9 @@ function drawRect(obj){
       
 
       if(mid<180){//如果小于180°就让坐标大一点，文字往下走
-        ctx.fillText(d.name,x-30,y-30);
+        ctx.fillText(d.name+' '+d.sum+"笔",x-30,y-30);
       }else{//如果大于180°就让坐标小一点，文字往上走
-        ctx.fillText(d.name,x+30,y+40);
+        ctx.fillText(d.name+' '+d.sum+"笔",x+20,y+40);
       }     
       now+=ang;//更新now
     })
