@@ -1,6 +1,6 @@
 //wxcharts.js
 const util = require('../util/util.js');
-var wxCharts = require('../util/wxcharts-min.js');
+var Charts = require('../util/wxcharts-min.js');
 const dateUtil=require('../util/Date.js')
 const ArrUtil=require('../util/arrUtil.js')
 const drawCanvas=require('../util/drawCanvas.js')
@@ -23,6 +23,7 @@ Page({
     });
   },
   onDisplay() {
+
     this.setData({ show: true });
   },
   onClose() {
@@ -48,7 +49,6 @@ Page({
     let maxDate=''
     var rangDate=this.data.showDate
     arr=rangDate.split('-')
-    console.log(rangDate)
     if(arr.length>0){
       minDate=arr[0]
       maxDate=arr[1]
@@ -76,7 +76,7 @@ Page({
           //count 总数
           newArr.push({
             name:arr[i].key,
-            data:arr[i].count,
+            data:Math.abs(arr[i].count) ,
             color:colorArr[i],
             sum:arr[i].sum,
             index:arr[i].index,
@@ -86,15 +86,23 @@ Page({
         this.setData({
           arrObj:newArr
         })
-        drawCanvas.drawRect(newArr)
+        new Charts({
+          canvasId: 'canvas1',
+          type: 'pie',
+          series:newArr,
+          width:400,
+          height: 300,
+          dataLabel: true
+        });
+       // drawCanvas.drawRect(newArr)  
       }
     })
   },
   onReady: function (e) {
-    let min=dateUtil.formatDate( dateUtil.getMinDate(year,month-1))
-    let max=dateUtil.formatDate(dateUtil.getMinDate(year,month+1))
-    console.log(min,max)
-    this.SelectRangDate(min,max)
+    //加载图表开发工具会死机，需要删除重启
+    
+   
   }
+  
 });
 

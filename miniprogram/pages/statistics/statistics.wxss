@@ -1,7 +1,17 @@
 /* miniprogram/pages/statistics/statistics.wxss */
 .mycontainer {
   
-  padding: 30rpx 0rpx;
+   padding: 30rpx 0rpx;
    box-sizing: border-box;
 } 
-
+.canvasBox{
+  position: absolute;
+  width: 100%;
+  right: -900px;
+  top: -600px;
+}
+.canvas {
+  width: 400px;
+  height: 300px;
+  transform: scale(0.8)
+}

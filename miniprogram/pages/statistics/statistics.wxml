@@ -12,10 +12,11 @@
   
   max-date="{{defaultDate}}"
 />
-<van-button type="primary" block size="normal" bind:click="callSelectRangDate">查询</van-button>
-<view class="mycontainer">
+<!-- <van-button type="primary" block size="normal" bind:click="callSelectRangDate">查询</van-button> -->
+<!-- <view class="mycontainer {{show==true?'canvasBox':''}}">
   <canvas type="2d" id="myCanvas" class="canvas"></canvas> 
-</view>
+</view> -->
+<canvas canvas-id="canvas1" class="canvas"></canvas>
 <van-collapse value="{{ activeNames }}" bind:change="onChange">
   <van-collapse-item :name="{{item.index+1}}" wx:for="{{arrObj}}">
     <view slot="title">
