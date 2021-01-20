@@ -20,3 +20,26 @@
   font-weight: bold;
   margin-top: 20rpx;
 }
+.nav{
+  color: cadetblue;
+  font-size: 28rpx;
+  font-weight: bold;
+  display: inline;
+  margin-right: 40rpx;
+}
+.Navcell{
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.van-swipe-cell__left,
+.van-swipe-cell__right {
+  display: inline-block;
+  width: 65px;
+  height: 44px;
+  font-size: 15px;
+  line-height: 44px;
+  color: #fff;
+  text-align: center;
+  background-color: cadetblue;
+}

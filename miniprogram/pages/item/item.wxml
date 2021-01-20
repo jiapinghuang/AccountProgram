@@ -1,0 +1,17 @@
+<!--miniprogram/pages/item/item.wxml-->
+<van-cell-group icon-size="14px">
+  <van-field label="类目"
+    value="{{ text }}"
+    placeholder="请输入类目"
+    border="{{ true }}"
+    bind:change="onTextChange"
+  />
+  <van-field label="类目备注"
+    value="{{ item_desc }}"
+    placeholder="类目备注"
+    border="{{ true }}"
+    bind:change="onItemDescChange"
+  />
+</van-cell-group>
+<van-button type="primary" block bind:click="callAdd">添加</van-button>
+<van-notify id="van-notify" />

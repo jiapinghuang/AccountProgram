@@ -15,17 +15,16 @@ Page({
     userName:"",
     userCity:"",
     avatarUrl:"",
-    activeNames: '',
+    activeName:'',//默认关闭
+    hasDate:false,
+    flag:false, //监控是否展开
+    itemflag:false,
+    itemhasDate:false,
     arrObj:'',
-    isLogin:false
+    isLogin:false,
+    itemObj:[]
   } ,
   onChange(event) {
-    this.setData({
-      activeNames: event.detail,
-    });
-  },
-  onChange(event) {
-    //手风琴
     this.setData({
       activeName: event.detail,
     });
@@ -33,7 +32,7 @@ Page({
   delclick:function(){
     Dialog.confirm({
       title: '标题',
-      message: '弹窗内容',
+      message: '真的要全部删除吗？',
     }).then(() => {
         //弹框确认时
         try {
@@ -48,7 +47,64 @@ Page({
     });
   },
   selectAll:function(){
-    this.callselectAll()
+    //控制是否展开数据
+    if(!this.data.hasDate){
+      this.callselectAll()
+      this.setData({
+        hasDate:true
+      })
+    }
+    this.setData({
+      flag:!this.data.flag
+    })
+  },
+  selectItem:function(b){
+    if(!this.data.itemhasDate||b){
+      wx.cloud.callFunction({
+        // 云函数名称
+        name: 'GetItemType',
+        complete: res => {
+          console.log('callFunction test result: ', res.result.data)
+          this.setData({
+            itemObj:res.result.data,
+            itemhasDate:true
+          })
+        }
+      }) 
+    }
+    this.setData({
+      itemflag:!this.data.itemflag
+    })
+      
+  },
+  onClose(event) {
+    var _id=event.detail.name  //要修改的id
+    const { position } = event.detail;
+    switch (position) {
+      case 'right':
+        Dialog.confirm({
+          message: '确定删除吗？',
+        }).then(() => {
+            //删除item
+            this.delItem(_id)
+        }) .catch(() => {
+          // on cancel
+        });
+        break;
+    }
+  },
+  delItem:function(_id){
+    //删除类目
+    wx.cloud.callFunction({
+      // 云函数名称
+      name: 'delItemType',
+      data:{
+        _id:_id
+      },
+      complete: res => {
+        this.selectItem(true)//刷新数据
+      }
+    })    
   },
   callselectAll:function(){
     wx.cloud.callFunction({
@@ -82,7 +138,7 @@ Page({
       name: 'delAll',
       // 传给云函数的参数
       data: {
-      
+        
       },
       complete: res => {
         console.log('callFunction test result: ', res)
@@ -126,7 +182,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+ 
   },
 
   /**

@@ -81,6 +81,13 @@
         {
           "name": "pages/mine/mine",
           "pathName": "pages/mine/mine",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/item/item",
+          "pathName": "pages/item/item",
+          "query": "type=add",
           "scene": null
         }
       ]

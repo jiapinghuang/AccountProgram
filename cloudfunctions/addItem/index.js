@@ -9,19 +9,14 @@ const _ = db.command
 // 云函数入口函数
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
-  return await db.collection('Item').where({
+  return await db.collection('Item').add({
+    data: {
+      text: event.text,
+      value: event.text,  
+      item_desc:event.item_desc,
       openid: wxContext.OPENID,
-      del: false
-  }).field({
-    text: true,
-    value:true,
-    item_desc:true,
-    _id:true
-  })
-  .get({
-    success: function(res) {
-      // res.data 是包含以上定义的两条记录的数组
-      console.log(res.data)
+      del:false
     }
   })
+  
 }

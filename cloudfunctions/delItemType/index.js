@@ -9,10 +9,12 @@ const _ = db.command
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
   try {
-    return await db.collection('Account').where({
-      openid: wxContext.OPENID,
-      del: _.exists(true)
-    }).remove()
+    return await db.collection('Item').where({
+      del: false,
+      _id:event._id,
+      openid: wxContext.OPENID
+    })
+    .remove()
   } catch(e) {
     console.error(e)
   }
