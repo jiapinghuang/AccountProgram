@@ -59,8 +59,6 @@
     </view>
     <!-- 结束 -->
 </view>
-</view>
-
    <!-- 账目分类 -->
    <van-collapse>
       <van-cell-group>
@@ -82,5 +80,8 @@
         </van-cell-group>
         <view slot="right">删除</view>
       </van-swipe-cell>
+</view>
+
+  
 <van-dialog id="van-dialog" />
 <van-toast id="van-toast" />

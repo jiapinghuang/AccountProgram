@@ -87,7 +87,6 @@ Page({
   //金额变化时
   onMoneyChange:function(event){
      var m=event.detail
-     console.log(m)
      this.setData({
       money:m
     })
@@ -95,7 +94,6 @@ Page({
   //备注变化时
   onDescChange:function(event){
     var d=event.detail
-    console.log(d)
     this.setData({
      desc:d
    })
@@ -110,8 +108,7 @@ Page({
     if(item_type==='O'){
       money='-'+money
     }
-    console.log(item_name)
-    if(!item_name||!money||!addDate||!desc){
+    if(!item_name||!money||!addDate){
         console.log("至少有一项为空值")
     }else{
       try{
@@ -127,7 +124,6 @@ Page({
             item_name:item_name
           },
           complete: res => {
-            console.log('callFunction test result: ', res)
             Notify({ type: 'success', message: '添加成功' })
           }
         })
