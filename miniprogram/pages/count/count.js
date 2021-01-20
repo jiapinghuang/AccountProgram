@@ -1,9 +1,11 @@
 // miniprogram/pages/count/count.js
 const dateUtil=require('../util/Date.js')
+const util=require('../util/checkLogin.js')
 const date = new Date();
 const year = date.getFullYear();
 const month = date.getMonth()+1;
 import Notify from '@vant/weapp/notify/notify';
+import Dialog from '/@vant/weapp/dialog/dialog';
 Page({
 
   /**
@@ -24,7 +26,8 @@ Page({
       maxDate:new Date().getTime(),
       //类目
       option1: [],
-      value1: ''      
+      value1: '' ,
+      overlayShow:true //显示遮罩    
   },
   //类目切换时
   itemChange(event){
@@ -62,9 +65,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // var value = wx.getStorageSync('openid')
-    this.callGetItemType()
-        
+  
   },
   //获取数据库类目
   callGetItemType:function(){
@@ -142,16 +143,26 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
   },
-
+  onLoginTip:function(){
+    Dialog.alert({
+      message: '在我的页面授权后，才能使用~',
+    }).then(() => {
+      // on close
+    });
+  },
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-
+  onShow:function(){
+    var cover=util.getOverlayShowStorge()
+    if(cover){
+      this.setData({
+        overlayShow:false
+      })
+      this.callGetItemType()
+    }
   },
-
   /**
    * 生命周期函数--监听页面隐藏
    */

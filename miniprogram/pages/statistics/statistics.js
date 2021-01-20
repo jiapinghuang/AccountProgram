@@ -1,9 +1,11 @@
 //wxcharts.js
+const LoginUtil=require('../util/checkLogin.js')
 const util = require('../util/util.js');
 var Charts = require('../util/wxcharts-min.js');
 const dateUtil=require('../util/Date.js')
 const ArrUtil=require('../util/arrUtil.js')
 const drawCanvas=require('../util/drawCanvas.js')
+import Dialog from '/@vant/weapp/dialog/dialog';
 const date = new Date();
 const year = date.getFullYear();
 const month = date.getMonth()+1;
@@ -14,8 +16,8 @@ Page({
     arrObj:[], //时间段数据
     minDate:dateUtil.getMinDate(year,month),
     defaultDate:new Date().getTime(),
-    activeNames: ['1'] //折叠面板参数
-    
+    activeNames: ['1'], //折叠面板参数
+    overlayShow:true
   },
   onChange(event) {
     this.setData({
@@ -40,7 +42,14 @@ Page({
     this.callSelectRangDate()
   },
   onLoad:function(e){
-    
+   
+  },
+  onLoginTip:function(){
+    Dialog.alert({
+      message: '在我的页面授权后，才能使用~',
+    }).then(() => {
+      // on close
+    });
   },
   //按区间查找数据
   callSelectRangDate:function(){
@@ -101,7 +110,14 @@ Page({
   onReady: function (e) {
     //加载图表开发工具会死机，需要删除重启
     
-   
+  },
+  onShow:function(){
+    var cover=LoginUtil.getOverlayShowStorge()
+    if(cover){
+      this.setData({
+        overlayShow:false
+      })
+    }
   }
   
 });

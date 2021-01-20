@@ -1,6 +1,7 @@
 // miniprogram/pages/mine/mine.js
 const util=require('../util/checkLogin.js')
 const ArrUtil=require('../util/arrUtil.js')
+const comUtil=require('../util/common.js')
 import Dialog from '/@vant/weapp/dialog/dialog';
 import Toast from '/@vant/weapp/toast/toast';
 Page({
@@ -11,11 +12,12 @@ Page({
   data: {
     canIUse: wx.canIUse('button.open-type.getUserInfo')//使用授权模块
     ,
-    userName:"1",
-    userCity:"2",
+    userName:"",
+    userCity:"",
     avatarUrl:"",
     activeNames: '',
-    arrObj:''
+    arrObj:'',
+    isLogin:false
   } ,
   onChange(event) {
     this.setData({
@@ -91,64 +93,33 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) { 
-    var that=this  
-    util.SetUserDate(that)
-    var obj=[
-      {
-        addDate: 20210114,
-        del: false,
-        desc: "面试",
-        item_name: "交通",
-        item_type: "O",
-        money: "1000",
-        openid: "ok3nA4orVFYQ2ttc9b_YSOw0i9lQ",
-        _id: "b45a21d55fffecaa04c610cd214ce471"
-      },
-      {
-        addDate: 20210111,
-        del: false,
-        desc: "55",
-        item_name: "教育",
-        item_type: "O",
-        money: "55",
-        openid: "ok3nA4orVFYQ2ttc9b_YSOw0i9lQ",
-        _id: "023ce9555ffffd20046cfad149ac45ff",
-      },
-      {
-        addDate: 20210103,
-        del: false,
-        desc: "跑滴滴",
-        item_name: "交通",
-        item_type: "I",
-        money: "330",
-        openid: "ok3nA4orVFYQ2ttc9b_YSOw0i9lQ",
-        _id: "21ded5cb6001054c0508cb5456e30de9"
-      },
-      {
-        addDate: 20210106,
-        del: false,
-        desc: "租车服务",
-        item_name: "教育",
-        item_type: "I",
-        money: "100",
-        openid: "ok3nA4orVFYQ2ttc9b_YSOw0i9lQ",
-        _id: "023ce9556001056f048025172d40789d"
-      }
-    ]
-
+    var user=util.showUserInfo()
+    this.setData({
+      isLogin:user[0].isLogin,
+      avatarUrl:user[0].avatarUrl,
+      userName:user[0].nickName,
+      userCity:user[0].city
+    })
   },
   //授权成功回调存储数据
   bindGetUserInfo (e) {
     if(e.detail.userInfo){
       var that=this
-      util.getUserInfo(that,e.detail.userInfo)
-    }    
-  },
+      util.getUserStatus(that,e.detail.userInfo)
+    }
+    var user=util.showUserInfo()
+    this.setData({
+      isLogin:user[0].isLogin,
+      avatarUrl:user[0].avatarUrl,
+      userName:user[0].nickName,
+      userCity:user[0].city
+    })
+    },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+   
   },
 
   /**

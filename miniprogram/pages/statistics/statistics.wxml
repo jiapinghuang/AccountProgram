@@ -42,5 +42,6 @@
     </view>
   </van-collapse-item>
 </van-collapse>
-
-
+<!-- <van-overlay show="{{ overlayShow }}"  bind:click="onLoginTip" /> -->
+<van-dialog id="van-dialog" />
+<view class="{{overlayShow ? 'mask':'dd'}}" bindtap="onLoginTip"></view>

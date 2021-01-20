@@ -4,6 +4,7 @@ const dateUtil=require('../util/Date.js')
 const date = new Date();
 const year = date.getFullYear();
 const month = date.getMonth()+1;
+import Dialog from '/@vant/weapp/dialog/dialog';
 Page({
   /**
    * 页面的初始数据
@@ -18,7 +19,9 @@ Page({
     ODmoney:0,//某天统计
     IDmoney:0,
     IaccountDetail:[],//账本信息数组
-    OaccountDetail:[]
+    OaccountDetail:[],
+    overlayShow: true //遮罩层控制
+    
   },
   //日期开始
   onDisplay() {
@@ -163,15 +166,33 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.callSelectCurrentMon()
-    this.callSelectAccount()
-   
+    
   },
     /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log("onShow");
+    
     //util.checkSession(); 
+  },
+  onLoginTip:function(){
+    Dialog.alert({
+      message: '在我的页面授权后，才能使用~',
+    }).then(() => {
+      // on close
+    });
+  },
+  onReady:function(){
+
+  },
+  onShow:function(){
+    var cover=util.getOverlayShowStorge()
+    if(cover){
+      this.setData({
+        overlayShow:false
+      })
+    this.callSelectCurrentMon()
+    this.callSelectAccount()
+    }
   }
 })

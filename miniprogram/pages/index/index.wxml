@@ -14,8 +14,6 @@
   <van-calendar show="{{ show }}" bind:close="onClose" bind:confirm="onConfirm"
   min-date="{{ minDate }}" default-date='{{defaultDate}}' max-date='{{maxDate}}'
   />
-
-
 <view>
   <view class="item_container">
     <view class="item">
@@ -48,4 +46,7 @@
 <view class="item_container" wx:if="{{IaccountDetail==false & OaccountDetail==false}}">
       <view class="item item_1">当天没有任何记录~</view>
 </view>
+<view class="{{overlayShow ? 'mask':'dd'}}" bindtap="onLoginTip"></view>
+<van-dialog id="van-dialog" />
+
 <!-- <button bindtap="test">call-当月份总收入</button> -->

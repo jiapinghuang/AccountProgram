@@ -43,33 +43,42 @@ function checkSession(){
       }
     }) 
 }
-function tool() {
-  console.log('i am a tool function.');
-}
 //用户授权缓存数据
-function getUserInfo(t,e){
+function getUserStatus(t,e){
    //本地存储
    wx.setStorageSync('city',e.city),
    wx.setStorageSync('nickName',e.nickName),
    wx.setStorageSync('province',e.province),
-   wx.setStorageSync('avatarUrl',e.avatarUrl) 
-   SetUserDate(t)
+   wx.setStorageSync('avatarUrl',e.avatarUrl),
+   wx.setStorageSync('isLogin',true)  
+   wx.setStorageSync('overlayShow', false)  //授权关闭遮罩  
 }
-//缓存数据更新到data
-function SetUserDate(t){ 
-  var that=t
-  var city=wx.getStorageSync('city')
-  var userName=wx.getStorageSync('nickName')
-  var avatarUrl=wx.getStorageSync('avatarUrl')
-  that.setData({
-      userCity:city,
-      userName:userName,
-      avatarUrl:avatarUrl
-  })
+function showUserInfo(){
+  var city = wx.getStorageSync('city')
+  var nickName = wx.getStorageSync('nickName')
+  var avatarUrl = wx.getStorageSync('avatarUrl')
+  var isLogin = wx.getStorageSync('isLogin')
+  var obj=[]
+  obj.push({city:city,nickName:nickName,avatarUrl:avatarUrl,isLogin:isLogin})
+  return obj
 }
+
+//用户授权缓存数据
+function getOverlayShowStorge(){
+  try {
+    var value = wx.getStorageSync('isLogin')
+    if (value) {
+       return value
+    }
+  } catch (e) {
+    // Do something when catch error
+     
+  }
+}
+
 module.exports={
   checkSession:checkSession,
-  getUserInfo:getUserInfo,
-  SetUserDate:SetUserDate,
-  tool:tool
+  getUserStatus:getUserStatus,
+  getOverlayShowStorge:getOverlayShowStorge,
+  showUserInfo:showUserInfo
 }
