@@ -9,7 +9,8 @@ exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
   //按天查询当天信息
   return await db.collection('Account').where({
-    addDate:event.addDate //number
+    addDate:event.addDate, //number
+    openid: wxContext.OPENID
   })
   .get({
     success: function(res) {

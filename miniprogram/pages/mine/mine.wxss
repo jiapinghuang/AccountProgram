@@ -1,1 +1,22 @@
 /* miniprogram/pages/mine/mine.wxss */
+
+.logo{
+  background-color: cadetblue;
+  height: 400rpx;
+}
+.logo image{
+  width: 300rpx;
+  height: 300rpx;
+  border-radius: 50%;
+  margin: 0 auto;
+
+  display: block;
+  box-sizing: border-box;
+}
+.userDetail{
+  text-align: center;
+  color:white;
+  font-size: 28rpx;
+  font-weight: bold;
+  margin-top: 20rpx;
+}

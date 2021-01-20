@@ -38,7 +38,7 @@
         <van-col span="4">{{item.money}}</van-col>
         <van-col span="4">{{item.desc}}</van-col>
       </van-row>
-       {{item._id}}
+       <!-- {{item._id}} -->
     </view>
   </van-collapse-item>
 </van-collapse>

@@ -54,7 +54,6 @@ Page({
   //展示账本信息
   showDayDetail:function(obj) {
     this.calulateMMoney(obj,"d")
-    console.log('-------')
     let Iarr=[]
     let Oarr=[]
     obj.forEach(item=>{
@@ -164,8 +163,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   // this.callSelectCurrentMon()
-   // this.callSelectAccount()
+    this.callSelectCurrentMon()
+    this.callSelectAccount()
    
   },
     /**
