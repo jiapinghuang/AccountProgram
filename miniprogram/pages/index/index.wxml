@@ -1,5 +1,5 @@
 
-<view class="item_container">
+<view class="item_container bg">
   <view class="item">
     <view>本月收入</view>
     <view>{{IMmoney}}</view>
@@ -48,5 +48,13 @@
 </view>
 <view class="{{overlayShow ? 'mask':'dd'}}" bindtap="onLoginTip"></view>
 <van-dialog id="van-dialog" />
+
+<!-- 新增按钮 -->
+<view class="addIcon"> 
+    <navigator class="nav" url="/pages/count/count">
+      <van-icon name="add"  size="50px" color="cadetblue"></van-icon>
+    </navigator>
+</view>
+
 
 <!-- <button bindtap="test">call-当月份总收入</button> -->

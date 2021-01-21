@@ -8,6 +8,17 @@
   text-align: center;
   color: white;
 }
+.addIcon{
+  position: fixed;
+  bottom: 20rpx;
+  right: 20rpx;
+}
+
+.bg{
+  background-color: cadetblue;
+  color: white;
+  border-radius: 25rpx;
+}
 .item_container{
   width: 100%;
   height:auto;

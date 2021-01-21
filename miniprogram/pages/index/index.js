@@ -117,50 +117,11 @@ Page({
     }
    
   },
-  test:function() {
-    var obj=[
-      {
-        addDate: 20210114,
-        del: false,
-        desc: "面试",
-        item_name: "交通",
-        item_type: "O",
-        money: "1000",
-        openid: "ok3nA4orVFYQ2ttc9b_YSOw0i9lQ",
-        _id: "b45a21d55fffecaa04c610cd214ce471"
-      },
-      {
-        addDate: 20210111,
-        del: false,
-        desc: "55",
-        item_name: "教育",
-        item_type: "O",
-        money: "55",
-        openid: "ok3nA4orVFYQ2ttc9b_YSOw0i9lQ",
-        _id: "023ce9555ffffd20046cfad149ac45ff",
-      },
-      {
-        addDate: 20210103,
-        del: false,
-        desc: "跑滴滴",
-        item_name: "交通",
-        item_type: "I",
-        money: "330",
-        openid: "ok3nA4orVFYQ2ttc9b_YSOw0i9lQ",
-        _id: "21ded5cb6001054c0508cb5456e30de9"
-      },
-      {
-        addDate: 20210106,
-        del: false,
-        desc: "租车服务",
-        item_name: "教育",
-        item_type: "I",
-        money: "100",
-        openid: "ok3nA4orVFYQ2ttc9b_YSOw0i9lQ",
-        _id: "023ce9556001056f048025172d40789d"
-      }
-    ]
-    this.showDayDetail(obj)
+  addAccount:function(){
+    //跳转到新增页面
+    wx.navigateTo({
+      url:'pages/count/count'
+    })
   },
    /**
    * 生命周期函数--监听页面加载
@@ -192,7 +153,7 @@ Page({
         overlayShow:false
       })
     this.callSelectCurrentMon()
-    this.callSelectAccount()
+   // this.callSelectAccount()
     }
   }
 })

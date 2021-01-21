@@ -1,30 +1,99 @@
-<!-- <view>1、统计所有收入支出的数据，可根据日期（年月日）分段筛选记账数据</view>
-<view>2、数据可视化显示：饼状图分块统计记账数据</view>
-<view>3、统计每种记账类型的总金额和总笔数据</view>
-<view>4、查看每种类型的详细数据</view> -->
-<van-cell title="选择日期区间" value="{{ showDate }}" bind:click="onDisplay" />
-<van-calendar
-  show="{{ show }}"
-  type="range"
-  bind:close="onClose"
-  bind:confirm="onConfirm"
-  min-date="{{ minDate }}" 
-  
-  max-date="{{defaultDate}}"
-/>
-<!-- <van-button type="primary" block size="normal" bind:click="callSelectRangDate">查询</van-button> -->
-<!-- <view class="mycontainer {{show==true?'canvasBox':''}}">
-  <canvas type="2d" id="myCanvas" class="canvas"></canvas> 
-</view> -->
-<canvas canvas-id="canvas1" class="canvas"></canvas>
+<van-dialog
+  use-slot
+  title="日历"
+  show="{{showMinRili}}"
+  show-cancel-button
+  confirm-button-open-type="comfirmMinFun"
+  bind:confirm="comfirmMinFun"
+  bind:close="onMyMinClose"
+>
+  <view class="rili">
+    <view class="year">
+      <view wx:for="{{years}}" data-year="{{item}}" data-index="{{index}}" bindtap="clickMinYear" 
+        class="{{ tempMinIndex ==index?'actives':'unactives'}}">
+        {{item}} 
+      </view>   
+    </view>
+    <view class="month">
+      <view wx:for="{{months}}" class="{{ tempMinmon -1 ==index?'actives':'unactives'}}" data-mon="{{item}}" bindtap="clickMinMon"> {{item}}</view>
+    </view>
+  </view>
+</van-dialog>
+<van-dialog
+  use-slot
+  title="日历"
+  show="{{showMaxRili}}"
+  show-cancel-button
+  confirm-button-open-type="comfirmMaxFun"
+  bind:confirm="comfirmMaxFun"
+  bind:close="onMyMaxClose"
+>
+  <view class="rili">
+    <view class="year">
+      <view wx:for="{{years}}" data-year="{{item}}" data-index="{{index}}" bindtap="clickMaxYear" 
+        class="{{ tempMaxIndex ==index?'actives':'unactives'}}">
+        {{item}} 
+      </view>   
+    </view>
+    <view class="month">
+      <view wx:for="{{months}}" class="{{ temMaxmon -1 ==index?'actives':'unactives'}}" data-mon="{{item}}" bindtap="clickMaxMon"> {{item}}</view>
+    </view>
+  </view>
+</van-dialog>
+
+<view class="Content">
+    <view class="riliContent" bindtap="showRiliMinDialog"><image src="../asset/rili.png"></image></view>
+    <view class="riliContent">
+          {{confirmMinYear}}年
+    </view>
+    <view class="riliContent">
+          {{confirmMinMon}}月
+    </view>
+    <view class="riliContent">到</view>
+    <view class="riliContent" bindtap="showRiliMaxDialog">
+      <image src="../asset/rili.png"></image>
+    </view>
+    <view class="riliContent">
+          {{confirmMaxYear}}年
+    </view>
+    <view class="riliContent">
+          {{confirmMaxMon}}月
+    </view>
+    <view class="riliContent"><button bindtap="selectDateRang">查询</button></view>
+</view>
+
+<!-- 自定义日历组件 -->
+  <!-- <view class="rili">
+    <view class="year">
+      <view wx:for="{{years}}" data-year="{{item}}" bindtap="clickYear">
+        {{item}}
+      </view>   
+    </view>
+    <view class="month">
+      <view wx:for="{{months}}" data-mon="{{item}}" bindtap="clickMon"> {{item}}</view>
+    </view>
+  </view> -->
+
+<view class="message">{{message}}</view>
+<canvas canvas-id="canvas1" class="canvas" wx:if="{{!message}}"></canvas>
+
+<!-- 显示查询的条件 -->
+
 <van-collapse value="{{ activeNames }}" bind:change="onChange">
   <van-collapse-item :name="{{item.index+1}}" wx:for="{{arrObj}}">
-    <view slot="title">
+    <view slot="title" class="title">
       {{item.name}}
       <view>总金额:{{item.data}}</view> 
       <view>{{item.sum}}笔</view></view>
     <view>
-      <van-row>
+      <!-- 开始 -->
+      1111
+
+
+
+
+      <!-- 结束 -->
+      <!-- <van-row>
         <van-col span="4"offset="2" >时间</van-col>
         <van-col span="4">类型</van-col>
         <van-col span="4">收支</van-col>
@@ -42,6 +111,5 @@
     </view>
   </van-collapse-item>
 </van-collapse>
-<!-- <van-overlay show="{{ overlayShow }}"  bind:click="onLoginTip" /> -->
 <van-dialog id="van-dialog" />
 <view class="{{overlayShow ? 'mask':'dd'}}" bindtap="onLoginTip"></view>

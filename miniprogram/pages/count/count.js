@@ -109,7 +109,12 @@ Page({
       money='-'+money
     }
     if(!item_name||!money||!addDate){
-        console.log("至少有一项为空值")
+        Dialog.alert({
+          title: '注意',
+          message: '金额、类目、日期不能为空值！',
+        }).then(() => {
+          // on close
+        });
     }else{
       try{
         wx.cloud.callFunction({
@@ -124,11 +129,16 @@ Page({
             item_name:item_name
           },
           complete: res => {
-            Notify({ type: 'success', message: '添加成功' })
+            if(res.result._id){
+               //回到上一页
+              wx.navigateBack({
+                  delta: 1
+              })
+            }                   
           }
         })
       }catch(err){
-        Notify({ type: 'danger', message: '添加失败，请联系管理员' })
+          Notify({ type: 'danger', message: '添加失败，请联系管理员' })
       }
       
       

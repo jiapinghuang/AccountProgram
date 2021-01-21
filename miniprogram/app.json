@@ -25,17 +25,12 @@
         "iconPath": "pages/asset/tab/home.png",
         "selectedIconPath": "pages/asset/tab/home-active.png"
       },
-      {
-        "pagePath": "pages/count/count",
-        "text": "记账",
-        "iconPath": "pages/asset/tab/home.png",
-        "selectedIconPath": "pages/asset/tab/home-active.png"
-      },
+     
       {
         "pagePath": "pages/statistics/statistics",
-        "text": "图标",
-        "iconPath": "pages/asset/tab/home.png",
-        "selectedIconPath": "pages/asset/tab/home-active.png"
+        "text": "统计",
+        "iconPath": "pages/asset/tab/count.png",
+        "selectedIconPath": "pages/asset/tab/count-act.png"
       },
       {
         "pagePath": "pages/mine/mine",

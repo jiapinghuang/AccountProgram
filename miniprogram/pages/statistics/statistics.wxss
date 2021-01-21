@@ -11,9 +11,14 @@
   top: -600px;
 }
 .canvas {
-  width: 400px;
+  width: 100%;
   height: 300px;
   transform: scale(0.8)
+}
+.message{
+  color: #999;
+  margin-left: 80rpx;
+  margin-top: 80rpx;
 }
 .mask{
   width:100%;
@@ -25,3 +30,96 @@
   left:0;
   opacity:0;
 }
+.title view{
+  display: inline-block;
+  padding-left: 30rpx;
+}
+/* 日历样式 */
+.rili{
+  width: 600rpx;
+  height: 300rpx;
+  /* background-color:cadetblue; */
+  border-radius: 20rpx;
+  margin:40rpx auto;
+  box-shadow: 5rpx 5rpx 5rpx rgba(26, 6, 6, 0.281);
+  display: flex;
+  flex-direction: row;
+}
+.rili .year{
+  width: 100rpx;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  justify-content: space-around;
+  align-items: center;
+}
+.rili .year view{
+  border:2rpx #ffffff solid;
+  border-radius: 10rpx;
+  padding: 0 8rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  box-shadow: 5rpx 5rpx 5rpx rgba(26, 6, 6, 0.281);
+ 
+}
+.rili .month{
+  margin-left: 10rpx;
+ width: 500rpx;
+ height: auto;
+ display: flex;
+ flex-wrap: wrap;
+ align-content: space-around;
+ justify-content: space-around;
+ align-items: center;
+ text-align: center;
+}
+.rili .month view{
+ width: 25%;
+ height: 50rpx;
+ line-height: 50rpx;
+ border:2rpx #ffffff solid;
+ border-radius: 10rpx;
+ box-shadow: 5rpx 5rpx 5rpx rgba(26, 6, 6, 0.281);
+}
+/* 选中状态 */
+.month .actives{
+  background-color: cadetblue;
+  color: white;
+}
+.month .unactives{
+  background-color: white;
+  color: cadetblue;
+}
+.year .actives{
+  background-color:red;
+  color: white;
+}
+.year .unactives{
+  background-color: white;
+  color: cadetblue;
+}
+/* 日历图标样式 */
+.Content{
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  font-size: 30rpx;
+}
+ .riliContent image{
+    width: 50rpx;
+    height: 50rpx;
+    display: inline-block;
+    /* margin-left: 40rpx; */
+ }
+ .riliContent {
+   line-height: 50rpx;
+   margin-left: 10rpx;
+ }
+.riliContent button{
+  width: auto;
+  height: 50rpx;
+  line-height: 50rpx;
+  background-color: white;
+  font-size: 28rpx;
+ }
