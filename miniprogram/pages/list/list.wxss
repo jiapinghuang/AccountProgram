@@ -1,0 +1,19 @@
+/* miniprogram/pages/list/list.wxss */
+
+.account{ 
+  margin-left: 40rpx;
+  height: 80rpx;
+  width: 90%;
+  box-shadow: 5rpx 5rpx 5rpx rgba(26, 6, 6, 0.281);
+  line-height: 80rpx;
+  overflow: auto;
+  display: flex;
+  justify-content:space-around;
+  color: rgb(58, 54, 54);
+  font-size: 28rpx;
+}
+.account view{
+ width: auto;
+ display: inline-block;
+ margin-bottom: 12rpx;
+}

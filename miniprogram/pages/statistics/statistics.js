@@ -3,6 +3,8 @@ const LoginUtil=require('../util/checkLogin.js')
 var Charts = require('../util/wxcharts-min.js');
 const dateUtil=require('../util/Date.js')
 const ArrUtil=require('../util/arrUtil.js')
+const colorI=['#7CFC00','#FFFACD','#ADD8E6','#F08080','#E0FFFF']
+const colorO=['#8B4513','#FA8072','#F4A460','#2E8B57','#708090']
 import Dialog from '/@vant/weapp/dialog/dialog';
 const date = new Date();
 const year = date.getFullYear();
@@ -11,7 +13,9 @@ Page({
   data: {
     showDate: '',
     show: false,
-    arrObj:[], //时间段数据
+    arrObjI:[], //时间段数据
+    arrObjO:[],
+    showtab:false,//显示tab选项卡
     minDate:dateUtil.getMinDate(year,month),
     defaultDate:new Date().getTime(),
     activeNames: ['1'], //折叠面板参数
@@ -31,6 +35,23 @@ Page({
     confirmMaxMon:month,//确定大月
     tempMaxIndex:'0' //控制大年的样式添加
   },
+  clickUrl:function(e){
+    var data=e.currentTarget.dataset.obj
+    //console.log(data.detail)
+    //跳转带参
+    wx.navigateTo({
+      url:"/pages/list/list?arr="+JSON.stringify(data.detail),   
+    })
+  },
+  //弹窗属性
+  showPopup() {
+    this.setData({ Popshow: true });
+  },
+
+  onPopClose() {
+    this.setData({ Popshow: false });
+  },
+
   //自定义日历组件
   clickMinYear(event){
     console.log("点击year")
@@ -75,7 +96,6 @@ Page({
   },
   onMyMaxClose() {
    this.setData({ showMaxRili: false });
-   console.log("关闭了")
   },
   comfirmMaxFun(){
     //将临时year mon 存储到正式区
@@ -107,7 +127,10 @@ Page({
         // on close
       });
     }else{
-      this.SelectRangDate(minDate,maxDate)  
+       this.callSelectRangDate(minDate,maxDate,'I','canvas1',colorI)  
+       this.callSelectRangDate(minDate,maxDate,'O','canvas2',colorO) 
+ 
+    
     }
    
   },
@@ -122,8 +145,8 @@ Page({
       // on close
     });
   },
-  SelectRangDate:function(minDate,maxDate){
-  
+  callSelectRangDate:function(minDate,maxDate,item_type,canvas,color){
+   
     wx.cloud.callFunction({
       // 云函数名称
       name: 'SelectRangDate',
@@ -131,49 +154,65 @@ Page({
       data: {
         //一个月的范围
         minDate:parseInt(minDate),
-        maxDate:parseInt(maxDate) 
+        maxDate:parseInt(maxDate),
+        item_type:item_type
       },
       complete: res => {
-        console.log(res)
+        let arr=[]
         if(res.result.data.length>0){
-           this.setData({
-              arrObj:res.result.data
-          })
-            const arr=ArrUtil.GroupByArr(res.result.data,"item_name")
+            arr=ArrUtil.GroupByArr(res.result.data,"item_name")      
             const newArr=[]
-            const colorArr=['#f5c','#dd0','#0fc','#f85']
-            for(let i=0;i<arr.length;i++){
+            const colorArr=color
+            for(let i=0;i<arr.length;i++){          
               //count 总数
               newArr.push({
-                name:arr[i].key,
-                data:Math.abs(arr[i].count) ,
-                color:colorArr[i],
-                sum:arr[i].sum,
-                index:arr[i].index,
-                detail:arr[i].value
+                "name":arr[i].key,
+                "data":Math.abs(arr[i].count) ,
+                "color":colorArr[i],
+                "sum":arr[i].sum,
+                "index":arr[i].index,
+                "detail":arr[i].value
               })
-            }
-            this.setData({
-              arrObj:newArr,
-              min:minDate,
-              max:maxDate
-            })
+            }                
             new Charts({
-              canvasId: 'canvas1',
+              canvasId: canvas,
               type: 'pie',
               series:newArr,
-              width:300,
-              height: 250,
+              width:250,
+              height: 200,
               dataLabel: true
-            });         
+            });
+            if(item_type=="I"){
+              this.setData({
+                arrObjI:newArr,
+                showtab:true,
+                message:''
+              })
+            }else{
+              this.setData({
+                arrObjO:newArr,
+                showtab:true
+              })
+            } 
         }else{
-          this.setData({
-            message:"没有记账记录~",
-            arrObj:null
-          })
+          if(item_type=="I"){
+            this.setData({
+              message:"没有记账记录~",
+              showtab:false,
+              arrObjI:null
+            })
+          }else{
+            this.setData({
+              message:"没有记账记录~",
+              showtab:false,
+              arrObjO:null
+            })
+          } 
         } 
       }
     })
+
+    
   },
   onReady: function (e) {
     //加载图表开发工具会死机，需要删除重启
@@ -194,6 +233,11 @@ Page({
         max:maxDate
       }) 
     }
+  },
+  onChange(event) {
+    this.setData({
+      activeNames: event.detail,
+    });
   }
   
 });

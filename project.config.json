@@ -89,6 +89,11 @@
           "pathName": "pages/item/item",
           "query": "type=add",
           "scene": null
+        },
+        {
+          "name": "pages/list/list",
+          "pathName": "pages/list/list",
+          "scene": null
         }
       ]
     }

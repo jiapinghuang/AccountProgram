@@ -9,7 +9,8 @@ exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
   return await db.collection('Account').where({
     addDate: _.gte(event.minDate).and(_.lte(event.maxDate)),//大于 小于
-    openid: wxContext.OPENID
+    openid: wxContext.OPENID,
+    item_type:event.item_type
   })
   .get({
     success: function(res) {

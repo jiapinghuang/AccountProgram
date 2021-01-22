@@ -21,7 +21,7 @@ function GroupByArr(groupArr,column_name){
           sum++
         }      
       })
-      arr.push({"index":i,"key":sArr[i],"value":newArr,count:count,sum:sum})
+      arr.push({"index":i,"key":sArr[i],"value":newArr,"count":count,"sum":sum})
       count=0
       sum=0
   } 

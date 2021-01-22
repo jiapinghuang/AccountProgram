@@ -4,7 +4,8 @@
     "pages/mine/mine",
     "pages/statistics/statistics",
     "pages/count/count",
-    "pages/item/item"
+    "pages/item/item",
+    "pages/list/list"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -25,7 +26,6 @@
         "iconPath": "pages/asset/tab/home.png",
         "selectedIconPath": "pages/asset/tab/home-active.png"
       },
-     
       {
         "pagePath": "pages/statistics/statistics",
         "text": "统计",

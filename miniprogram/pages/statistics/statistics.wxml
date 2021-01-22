@@ -75,23 +75,41 @@
   </view> -->
 
 <view class="message">{{message}}</view>
-<canvas canvas-id="canvas1" class="canvas" wx:if="{{!message}}"></canvas>
 
-<!-- 显示查询的条件 -->
+  <canvas canvas-id="canvas1" class="canvas" wx:if="{{!message}}"></canvas>
+  <canvas canvas-id="canvas2" class="canvas" wx:if="{{!message}}"></canvas>
+
+
+<!-- 收入情况 -->
+<van-tabs type="card" wx:if="{{showtab}}">
+        <van-tab title="收入">   
+            <view class="account" wx:for="{{arrObjI}}" bindtap="clickUrl" data-obj="{{item}}">
+                {{item.name}}
+                <view>总金额:{{item.data}}</view> 
+                <view>总笔数:{{item.sum}}</view>       
+            </view>     
+          
+        </van-tab>
+        <van-tab title="支出">
+       
+            <view class="account" wx:for="{{arrObjO}}" bindtap="clickUrl" data-obj="{{item}}">
+                {{item.name}}
+                  <view>总金额:{{item.data}}</view> 
+                  <view>总笔数:{{item.sum}}</view>
+            </view>
+         
+        </van-tab>
+</van-tabs>
+
 
 <van-collapse value="{{ activeNames }}" bind:change="onChange">
-  <van-collapse-item :name="{{item.index+1}}" wx:for="{{arrObj}}">
+  <van-collapse-item :name="{{item.index+1}}" wx:for="{{arrObj1}}">
     <view slot="title" class="title">
       {{item.name}}
       <view>总金额:{{item.data}}</view> 
       <view>{{item.sum}}笔</view></view>
     <view>
       <!-- 开始 -->
-      1111
-
-
-
-
       <!-- 结束 -->
       <!-- <van-row>
         <van-col span="4"offset="2" >时间</van-col>
