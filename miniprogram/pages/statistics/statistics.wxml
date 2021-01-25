@@ -59,7 +59,7 @@
     <view class="riliContent">
           {{confirmMaxMon}}月
     </view>
-    <view class="riliContent"><button bindtap="selectDateRang">查询</button></view>
+    <view class="riliContent"><button bindtap="selectDateRang" >查询</button></view>
 </view>
 
 <!-- 自定义日历组件 -->
@@ -75,14 +75,15 @@
   </view> -->
 
 <view class="message">{{message}}</view>
-
-  <canvas canvas-id="canvas1" class="canvas" wx:if="{{!message}}"></canvas>
-  <canvas canvas-id="canvas2" class="canvas" wx:if="{{!message}}"></canvas>
+<canvas canvas-id="canvas1" class="canvas {{riliShow && canShow ?' ':' canvasBox'}}" wx:if="{{!message}}">
+</canvas>
+<canvas canvas-id="canvas2" class="canvas {{riliShow && canShow ?'canvasBox':''}}" wx:if="{{!message}}">
+</canvas>
 
 
 <!-- 收入情况 -->
-<van-tabs type="card" wx:if="{{showtab}}">
-        <van-tab title="收入">   
+<van-tabs type="card" wx:if="{{showtab}}" bind:click="clickIO">
+        <van-tab title="收入" >   
             <view class="account" wx:for="{{arrObjI}}" bindtap="clickUrl" data-obj="{{item}}">
                 {{item.name}}
                 <view>总金额:{{item.data}}</view> 
@@ -91,7 +92,6 @@
           
         </van-tab>
         <van-tab title="支出">
-       
             <view class="account" wx:for="{{arrObjO}}" bindtap="clickUrl" data-obj="{{item}}">
                 {{item.name}}
                   <view>总金额:{{item.data}}</view> 

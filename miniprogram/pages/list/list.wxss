@@ -4,7 +4,7 @@
   margin-left: 40rpx;
   height: 80rpx;
   width: 90%;
-  box-shadow: 5rpx 5rpx 5rpx rgba(26, 6, 6, 0.281);
+  /* box-shadow: 2rpx 2rpx 2rpx rgba(26, 6, 6, 0.281); */
   line-height: 80rpx;
   overflow: auto;
   display: flex;

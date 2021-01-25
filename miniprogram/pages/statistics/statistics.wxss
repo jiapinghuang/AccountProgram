@@ -1,19 +1,19 @@
 /* miniprogram/pages/statistics/statistics.wxss */
 .mycontainer {
-  
    padding: 30rpx 0rpx;
    box-sizing: border-box;
 } 
 .canvasBox{
   position: absolute;
   width: 100%;
-  right: -900px;
-  top: -600px;
+  right: -900rpx;
+  top: -600rpx;
 }
 .canvas {
   width: 250px;
-  height: 150px;
-  transform: scale(0.8);
+  height: 250px;
+  margin: 0 auto;
+  transform: scale(1);
   display: flex;
 }
 
@@ -105,7 +105,7 @@
 .Content{
   position: fixed;
   display: flex;
-  top: 0;
+  top: 40rpx;
   left: 40rpx;
   font-size: 30rpx;
 }
@@ -133,7 +133,7 @@
     margin-left: 40rpx;
     height: 80rpx;
     width: 90%;
-    box-shadow: 5rpx 5rpx 5rpx rgba(26, 6, 6, 0.281);
+    /* box-shadow: 2rpx 2rpx 2rpx rgba(26, 6, 6, 0.281); */
     line-height: 80rpx;
     overflow: auto;
     display: flex;

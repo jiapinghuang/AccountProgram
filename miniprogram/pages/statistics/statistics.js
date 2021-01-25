@@ -3,7 +3,7 @@ const LoginUtil=require('../util/checkLogin.js')
 var Charts = require('../util/wxcharts-min.js');
 const dateUtil=require('../util/Date.js')
 const ArrUtil=require('../util/arrUtil.js')
-const colorI=['#7CFC00','#FFFACD','#ADD8E6','#F08080','#E0FFFF']
+const colorI=['#ADD8E6','#F08080','#E0FFFF','#7CFC00','#FFFACD']
 const colorO=['#8B4513','#FA8072','#F4A460','#2E8B57','#708090']
 import Dialog from '/@vant/weapp/dialog/dialog';
 const date = new Date();
@@ -13,6 +13,8 @@ Page({
   data: {
     showDate: '',
     show: false,
+    riliShow:true,//显示日历时，将canvas移到画布外
+    canShow:true,
     arrObjI:[], //时间段数据
     arrObjO:[],
     showtab:false,//显示tab选项卡
@@ -35,6 +37,22 @@ Page({
     confirmMaxMon:month,//确定大月
     tempMaxIndex:'0' //控制大年的样式添加
   },
+  clickIO:function(e){
+    //点击收入时
+    if(e.detail.index===0){
+      //显示收入图表
+      this.setData({
+        canShow:true
+      })
+      this.showCanvas(this.data.arrObjI,'canvas1')
+    }else{
+      //显示支出图表   
+      this.setData({   
+        canShow:false
+      })
+      this.showCanvas(this.data.arrObjO,'canvas2')
+    }
+  },
   clickUrl:function(e){
     var data=e.currentTarget.dataset.obj
     //console.log(data.detail)
@@ -43,15 +61,6 @@ Page({
       url:"/pages/list/list?arr="+JSON.stringify(data.detail),   
     })
   },
-  //弹窗属性
-  showPopup() {
-    this.setData({ Popshow: true });
-  },
-
-  onPopClose() {
-    this.setData({ Popshow: false });
-  },
-
   //自定义日历组件
   clickMinYear(event){
     console.log("点击year")
@@ -67,7 +76,7 @@ Page({
     })
   },
   onMyMinClose() {
-    console.log("关闭")
+    this.setData({ riliShow:true});
   },
   comfirmMinFun(){
     console.log("确认")
@@ -80,7 +89,7 @@ Page({
   },
   showRiliMinDialog(){
     //显示日历控件
-    this.setData({ showMinRili: true });
+    this.setData({ showMinRili: true ,riliShow:false});
   },
   //自定义日历组件2
   clickMaxYear(event){
@@ -95,7 +104,7 @@ Page({
     })
   },
   onMyMaxClose() {
-   this.setData({ showMaxRili: false });
+   this.setData({ showMaxRili: false ,riliShow:true});
   },
   comfirmMaxFun(){
     //将临时year mon 存储到正式区
@@ -107,10 +116,9 @@ Page({
   },
   showRiliMaxDialog(){
     //显示日历控件
-    this.setData({ showMaxRili: true });
+    this.setData({ showMaxRili: true ,riliShow:false});
   },
   selectDateRang(){
-
     //区间查找数据
     let miny=this.data.confirmMinYear
     let minm=dateUtil.changeNum(this.data.confirmMinMon)
@@ -119,6 +127,7 @@ Page({
     let maxm=dateUtil.changeNum(this.data.confirmMaxMon)
     let mmday=dateUtil.getMaxDate(maxy,maxm)
     let maxDate=dateUtil.formatDate(mmday) //最大日期 
+    console.log(minDate,maxDate)
     if(parseInt(minDate)>parseInt(maxDate)){
       Dialog.alert({
         title: '标题',
@@ -126,17 +135,27 @@ Page({
       }).then(() => {
         // on close
       });
-    }else{
-       this.callSelectRangDate(minDate,maxDate,'I','canvas1',colorI)  
-       this.callSelectRangDate(minDate,maxDate,'O','canvas2',colorO) 
- 
-    
+    }else{    
+      //分别拿到支出收入数组
+      this.callSelectRangDate(minDate,maxDate,'I',colorI)
+      this.callSelectRangDate(minDate,maxDate,'O',colorO)  
     }
    
   },
+  showCanvas:function(newArr,canvas){
+    new Charts({
+      canvasId: canvas,
+      type: 'pie',
+      series:newArr,
+      width:250,
+      height: 250,
+      dataLabel: true
+    });
+  },
   //自定义组件2
   onLoad:function(e){
-   
+    
+    
   },
   onLoginTip:function(){
     Dialog.alert({
@@ -145,7 +164,7 @@ Page({
       // on close
     });
   },
-  callSelectRangDate:function(minDate,maxDate,item_type,canvas,color){
+  callSelectRangDate:function(minDate,maxDate,item_type,color){
    
     wx.cloud.callFunction({
       // 云函数名称
@@ -173,15 +192,10 @@ Page({
                 "index":arr[i].index,
                 "detail":arr[i].value
               })
-            }                
-            new Charts({
-              canvasId: canvas,
-              type: 'pie',
-              series:newArr,
-              width:250,
-              height: 200,
-              dataLabel: true
-            });
+            }
+            if(this.data.arrObjI.length==0){
+              this.showCanvas(newArr,'canvas1')
+            }          
             if(item_type=="I"){
               this.setData({
                 arrObjI:newArr,
@@ -210,13 +224,14 @@ Page({
           } 
         } 
       }
+     
     })
 
     
   },
   onReady: function (e) {
     //加载图表开发工具会死机，需要删除重启
-    
+    this. selectDateRang()
   },
   onShow:function(){
     var cover=LoginUtil.getOverlayShowStorge()

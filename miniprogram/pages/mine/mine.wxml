@@ -31,8 +31,8 @@
     <!-- 开始 -->
     <view>
     <van-collapse wx:if="{{flag}}" value="{{ activeName }}" bind:change="onChange">
-      <van-collapse-item  :name="{{item.index+1}}" wx:for="{{arrObj}}"> 
-        <view slot="title">
+      <van-collapse-item  :name="{{item.index+1}}" wx:for="{{arrObj}}" > 
+        <view slot="title"  class="title">
           {{item.name}}
           <view>总金额:{{item.data}}</view> 
           <view>{{item.sum}}笔</view></view>
