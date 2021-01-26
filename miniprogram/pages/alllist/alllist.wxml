@@ -1,0 +1,16 @@
+<!-- 数据显示 -->
+<view class="list"  wx:for="{{accountDetail}}">  
+    <view class="item">  
+      <view class="list_hd" >
+          <view class="title">{{item.key}}</view>
+          <view class="sum">{{item.count}}¥</view>
+      </view>
+      <view class="list_bd"  wx:for="{{item.value}}"> 
+          <view class="left">{{item.desc}}</view>
+          <view class="middle">
+              {{ item.addDate }}
+          </view>
+          <view class="right">{{item.money}}</view>
+      </view>
+    </view>
+</view>

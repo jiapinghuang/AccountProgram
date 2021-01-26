@@ -3,11 +3,16 @@
 <view>3、我的——扩展模块：新冠肺炎疫情监控模块</view> -->
 
 <view wx:if="{{!isLogin}}">
- <!-- <button wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>  -->
- <van-button type="primary" block wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</van-button>
+  <view class="logo">
+      <image src=""></image>
+      <view class="userDetail">
+        <van-button type="primary" block wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</van-button>
+      </view> 
+  </view>
 </view>
+
 <view wx:if="{{isLogin}}">
-<view>
+<view class="header">
   <view class="logo">
       <image src="{{avatarUrl}}"></image>
       <view class="userDetail">
@@ -17,71 +22,12 @@
   </view>
 </view>
 
-<view>
-    <van-collapse>
-      <van-cell-group>
-        <van-cell bind:click="delclick" title="删除我的所有数据"/>
-        <van-cell bind:click="selectAll" title="查看我的所有数据"/>
-        <!-- <van-cell bind:click="selectItem" title="维护账目分类" class="Navcell">
-            <navigator class="nav" url="/pages/item/item?type=add">新增</navigator>      
-        </van-cell> -->
-      </van-cell-group>        
-    </van-collapse>
- 
-    <!-- 开始 -->
-    <view>
-    <van-collapse wx:if="{{flag}}" value="{{ activeName }}" bind:change="onChange">
-      <van-collapse-item  :name="{{item.index+1}}" wx:for="{{arrObj}}" > 
-        <view slot="title"  class="title">
-          {{item.name}}
-          <view>总金额:{{item.data}}</view> 
-          <view>{{item.sum}}笔</view></view>
-         <view>           
-          
-        <van-row>
-          <van-col span="4"offset="2" >时间</van-col>
-          <van-col span="4">类型</van-col>
-          <van-col span="4">收支</van-col>
-          <van-col span="4">金额</van-col>
-          <van-col span="4">备注</van-col>
-        </van-row>
-
-        <van-row wx:for="{{item.detail}}" >
-        <van-col span="4" >{{item.addDate}}</van-col>
-        <van-col span="4"  offset="2">{{item.item_name}}</van-col>
-        <van-col span="4">{{item.item_type=="O"?'支出':'收入'}}</van-col>
-        <van-col span="4">{{item.money}}</van-col>
-        <van-col span="4">{{item.desc}}</van-col>
-      </van-row>
-      </view>
-      </van-collapse-item>
-    </van-collapse>
-    </view>
-    <!-- 结束 -->
+<view class="content">
+    <view bindtap="delclick">删除我的所有数据</view>
+    <view bindtap="clickUrl">查看所有记帐</view>
+    <view>其他</view>
 </view>
-   <!-- 账目分类 -->
-   <van-collapse>
-      <van-cell-group>
-        <van-cell bind:click="selectItem" title="维护账目分类" class="Navcell">
-            <navigator class="nav" url="/pages/item/item?type=add">新增</navigator>      
-        </van-cell>
-      </van-cell-group>        
-    </van-collapse>
-   <van-swipe-cell  wx:if="{{itemflag}}"
-        id="swipe-cell"
-        right-width="{{ 65 }}"
-        async-close
-        bind:close="onClose"
-        wx:for="{{itemObj}}"
-        name="{{item._id}}"
-      >
-        <van-cell-group>
-          <van-cell title="{{item.text}}" value="{{item.item_desc}}" />
-        </van-cell-group>
-        <view slot="right">删除</view>
-      </van-swipe-cell>
 </view>
 
-  
 <van-dialog id="van-dialog" />
 <van-toast id="van-toast" />

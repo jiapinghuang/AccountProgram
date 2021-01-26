@@ -16,18 +16,12 @@ Page({
     userCity:"",
     avatarUrl:"",
     activeName:'',//默认关闭
-    hasDate:false,
-    flag:false, //监控是否展开
-    itemflag:false,
-    itemhasDate:false,
-    arrObj:'',
-    isLogin:false,
-    itemObj:[]
+    isLogin:false
   } ,
-  onChange(event) {
-    this.setData({
-      activeName: event.detail,
-    });
+  clickUrl:function(e){
+    wx.navigateTo({
+      url:"/pages/alllist/alllist",   
+    })
   },
   delclick:function(){
     Dialog.confirm({
@@ -45,37 +39,6 @@ Page({
     }).catch(() => {
         //弹框取消时
     });
-  },
-  selectAll:function(){
-    //控制是否展开数据
-    if(!this.data.hasDate){
-      this.callselectAll()
-      this.setData({
-        hasDate:true
-      })
-    }
-    this.setData({
-      flag:!this.data.flag
-    })
-  },
-  selectItem:function(b){
-    if(!this.data.itemhasDate||b){
-      wx.cloud.callFunction({
-        // 云函数名称
-        name: 'GetItemType',
-        complete: res => {
-          console.log('callFunction test result: ', res.result.data)
-          this.setData({
-            itemObj:res.result.data,
-            itemhasDate:true
-          })
-        }
-      }) 
-    }
-    this.setData({
-      itemflag:!this.data.itemflag
-    })
-      
   },
   onClose(event) {
     var _id=event.detail.name  //要修改的id

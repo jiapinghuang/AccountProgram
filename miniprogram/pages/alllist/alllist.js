@@ -1,22 +1,30 @@
-// miniprogram/pages/list/list.js
+import ArrUtil from '../util/arrUtil.js';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    accountDetail:[]//总账本信息
   },
-
+  callselectAll:function(){
+    wx.cloud.callFunction({
+      // 云函数名称
+      name: 'selectAll',
+      // 传给云函数的参数
+      complete: res => {
+        const arr=ArrUtil.GroupByArr(res.result.data,"item_name")
+        this.setData({
+          accountDetail:arr
+        })    
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log("opt",options.arr)   
-    var data = JSON.parse(options.arr)
-    this.setData({
-      dataObj:data
-    })
+
   },
 
   /**
@@ -30,7 +38,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.callselectAll()
   },
 
   /**

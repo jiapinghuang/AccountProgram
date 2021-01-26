@@ -42,7 +42,7 @@
 </van-dialog>
 
 <view class="Content">
-    <view class="riliContent" bindtap="showRiliMinDialog"><image src="../asset/rili.png"></image></view>
+    <view class="riliContent" bindtap="showRiliMinDialog"><image src="../asset/search.png"></image></view>
     <view class="riliContent">
           {{confirmMinYear}}年
     </view>
@@ -51,7 +51,7 @@
     </view>
     <view class="riliContent">到</view>
     <view class="riliContent" bindtap="showRiliMaxDialog">
-      <image src="../asset/rili.png"></image>
+      <image src="../asset/search.png"></image>
     </view>
     <view class="riliContent">
           {{confirmMaxYear}}年
@@ -82,7 +82,8 @@
 
 
 <!-- 收入情况 -->
-<van-tabs type="card" wx:if="{{showtab}}" bind:click="clickIO">
+<van-tabs type="card" wx:if="{{showtab}}" bind:click="clickIO"
+ color="tomato" title-active-color="white">
         <van-tab title="收入" >   
             <view class="account" wx:for="{{arrObjI}}" bindtap="clickUrl" data-obj="{{item}}">
                 {{item.name}}

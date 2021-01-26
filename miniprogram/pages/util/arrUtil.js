@@ -1,3 +1,4 @@
+
 function GroupByArr(groupArr,column_name){
   //根据某一项生成分类组
   //column_name要分类的列名 groupArr对象类型的数组
@@ -21,6 +22,12 @@ function GroupByArr(groupArr,column_name){
           sum++
         }      
       })
+      newArr.filter((item)=>{
+        var str=item.addDate+''
+        console.log(str)
+         return item.addDate= str.substring(0,4)+'年'+str.substring(4,6)+'月'+str.substring(6,10)+'日'
+      })
+      console.log(newArr)
       arr.push({"index":i,"key":sArr[i],"value":newArr,"count":count,"sum":sum})
       count=0
       sum=0

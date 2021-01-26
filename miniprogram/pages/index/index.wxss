@@ -11,7 +11,7 @@
 .addIcon{
   position: fixed;
   bottom: 20rpx;
-  right: 20rpx;
+  right: 35rpx;
 }
 
 .header{

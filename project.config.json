@@ -93,6 +93,12 @@
         {
           "name": "pages/list/list",
           "pathName": "pages/list/list",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/alllist/alllist",
+          "pathName": "pages/alllist/alllist",
           "scene": null
         }
       ]
