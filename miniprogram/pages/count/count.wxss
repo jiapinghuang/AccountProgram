@@ -39,3 +39,18 @@
   left:0;
   opacity:0;
 }
+
+/* 选项卡样式 */
+ .actives{
+  background-color: tomato;
+}
+
+.unactives{
+  background-color: rgb(122, 126, 116);
+}
+.itemList{
+  padding:15rpx;
+  border-radius: 35rpx;
+  font-size: 24rpx;
+  color: white;
+}

@@ -1,43 +1,67 @@
-
-<!-- <text>记账：记账数据录入，可选择记账类型</text> -->
-
-<van-dropdown-menu >
-  <van-dropdown-item title="记账类目" value="{{ value1 }}" options="{{ option1 }}"
-  bind:change="itemChange"/>
-</van-dropdown-menu>
-<van-cell-group icon-size="14px">
-  <van-field label="金额"
-    value="{{ value }}"
-    placeholder="请输入金额"
-    border="{{ true }}"
-    bind:change="onMoneyChange"
-    data-money="{{money}}"
-  />
-  <van-field label="备注"
-    value="{{ value }}"
-    placeholder="备注"
-    border="{{ true }}"
-    bind:change="onDescChange"
-  />
-  <van-cell title="日期" value="{{ addDate }}" bind:click="onDisplay" />
-  <van-calendar show="{{ show }}" bind:close="onClose" bind:confirm="onConfirm"
-  min-date="{{ minDate }}" default-date='{{defaultDate}}' max-date="{{maxDate}}"
-  />
-  <van-radio-group value="{{ item_type }}" bind:change="onRadioChange">
-    <van-cell-group>
-      <van-cell title="收入" clickable data-name="I" bind:click="onRadioClick">
-        <van-radio slot="right-icon" name="I" />
-      </van-cell>
-      <van-cell title="支出" clickable data-name="O" bind:click="onRadioClick">
-        <van-radio slot="right-icon" name="O" />
-      </van-cell>
-    </van-cell-group>
-  </van-radio-group>
-</van-cell-group>
-
- <van-button type="primary" block bind:click="callAdd">添加</van-button>
- <van-notify id="van-notify" />
-
- <!-- <van-overlay show="{{ overlayShow }}" bind:click="onLoginTip" /> -->
+<!-- 切换卡 -->
+<van-tabs type="card" bind:click="onClick" color="tomato" title-active-color="white">
+        <van-tab title="收入" >
+              <!-- 记账分类   -->
+              <van-grid column-num="6" border="{{ false }}">
+                <van-grid-item use-slot wx:for="{{ Ilist }}">
+                    <view data-itemname="{{item.type}}" bindtap="clickItemType"  data-index="{{index}}"
+                    class="itemList  {{ curIndex ==index?' actives':' unactives'}}">
+                      {{item.type}}
+                    </view>
+                </van-grid-item>
+              </van-grid>
+              <!-- 记账分类   -->
+              <van-cell-group icon-size="14px">
+              <van-field label="金额"  input-align="right"
+                value="{{ obj.money }}"
+                placeholder="请输入金额"
+                border="{{ true }}"
+                bind:change="onMoneyChange"></van-field>
+            
+              <van-field label="备注"  input-align="right"
+                value="{{ obj.desc }}"
+                placeholder="备注"
+                border="{{ true }}"
+                bind:change="onDescChange"></van-field>  
+              </van-cell-group>
+             
+              <van-cell title="日期" value="{{ addDate }}" bind:click="onDisplay" />
+              <van-calendar show="{{ show }}" bind:close="onClose" bind:confirm="onConfirm"
+              min-date="{{ minDate }}" default-date='{{defaultDate}}' max-date="{{maxDate}}"
+              />
+              <van-button color="tomato" type="primary" block bind:click="callAdd">添加</van-button>
+        </van-tab>
+        <van-tab title="支出">
+               <!-- 记账分类   -->
+               <van-grid column-num="6" border="{{ false }}">
+                <van-grid-item use-slot wx:for="{{ Olist }}">
+                    <view data-itemname="{{item.type}}" bindtap="clickItemType"  data-index="{{index}}"
+                    class="itemList  {{ curIndex ==index?' actives':' unactives'}}">
+                      {{item.type}}
+                    </view>
+                </van-grid-item>
+              </van-grid>
+              <!-- 记账分类   -->
+              <van-cell-group icon-size="14px">
+              <van-field label="金额" input-align="right"
+                value="{{ obj.money }}"
+                placeholder="请输入金额"
+                border="{{ true }}"
+                bind:change="onMoneyChange"></van-field>
+            
+              <van-field label="备注" input-align="right"
+                value="{{ obj.desc }}"
+                placeholder="备注"
+                border="{{ true }}"
+                bind:change="onDescChange"></van-field>  
+              </van-cell-group>
+              <van-cell title="日期" value="{{ addDate }}" bind:click="onDisplay" />
+              <van-calendar show="{{ show }}" bind:close="onClose" bind:confirm="onConfirm"
+              min-date="{{ minDate }}" default-date='{{defaultDate}}' max-date="{{maxDate}}"
+              />
+              <van-button color="tomato" type="primary" block bind:click="callAdd">添加</van-button>     
+        </van-tab>
+</van-tabs>
+<van-notify id="van-notify" />
  <view class="{{overlayShow ? 'mask':'dd'}}" bindtap="onLoginTip"></view>
  <van-dialog id="van-dialog" />

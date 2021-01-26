@@ -1,11 +1,14 @@
 // miniprogram/pages/count/count.js
 const dateUtil=require('../util/Date.js')
+const arrUtil=require('../util/arrUtil.js')
 const util=require('../util/checkLogin.js')
+// const Form=require('../util/Form.js')
 const date = new Date();
 const year = date.getFullYear();
 const month = date.getMonth()+1;
 import Notify from '@vant/weapp/notify/notify';
 import Dialog from '/@vant/weapp/dialog/dialog';
+
 Page({
 
   /**
@@ -13,40 +16,35 @@ Page({
    */
   data:{
       item_type:'I',
-      desc:'',//备注
-      item_name:'',//类目名称
-      money:null,
-      addDate:''//添加时间
-
+      addDate:'',//添加时间
+      obj:{},
       //时间控件变量
-      ,date: '',
+      date: '',
       show: false,
       minDate:dateUtil.getMinDate(year,month-2),
       defaultDate:new Date().getTime(),
       maxDate:new Date().getTime(),
       //类目
-      option1: [],
-      value1: '' ,
-      overlayShow:true //显示遮罩    
+      overlayShow:true,//显示遮罩   
+
+      //选项卡
+      curIndex:0
   },
-  //类目切换时
-  itemChange(event){
-    var n=event.detail
+  //tab卡
+  onClick(event) {
     this.setData({
-      item_name:n
+      //恢复为初始值
+      curIndex:0,
+      obj:{},
+      item_type:event.detail.name==0?'I':'O'
     })
   },
-  //单选框的
-  onRadioChange(event) {
+  clickItemType(event){
+    // console.log(event)
     this.setData({
-      item_type: event.detail,
-    });
-  },
-  onRadioClick(event) {
-    const { name } = event.currentTarget.dataset;
-    this.setData({
-      item_type: name,
-    });
+      item_name:event.currentTarget.dataset.itemname,
+      curIndex:event.currentTarget.dataset.index
+    })
   },
   //日期开始
   onDisplay() {
@@ -57,15 +55,17 @@ Page({
   },
   onConfirm(event) {
     this.setData({
-      show: false,
-      addDate: dateUtil.formatDate(event.detail),
+      show: false, // 
+      addDate:dateUtil.formatDate(event.detail),
     });
+    this.data.obj.addDate=dateUtil.formatDate(event.detail)
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    
+   // console.log("obj",Iobj)
   },
   //获取数据库类目
   callGetItemType:function(){
@@ -73,13 +73,24 @@ Page({
       // 云函数名称
       name: 'GetItemType',
       complete: res => {
-        console.log('callFunction test result: ', res.result.data)
-        var v=res.result.data[0].text
-        this.setData({
-          option1:res.result.data,
-          value1:v,
-          item_name:v
-        })
+        // console.log('itemlist ', res.result.data)
+        if(res.result.data.length>0){
+          let arr=arrUtil.GroupByArr(res.result.data,"IO")
+          // console.log(arr)
+           for(let i=0;i<arr.length;i++){
+             if(arr[i].key==='O'){
+                this.setData({
+                   Olist:arr[i].value
+                })
+             }else{
+                this.setData({
+                   Ilist:arr[i].value
+                })
+             }
+           }
+       
+        }
+        
       }
     })
     
@@ -87,28 +98,26 @@ Page({
   //金额变化时
   onMoneyChange:function(event){
      var m=event.detail
-     this.setData({
-      money:m
-    })
+     this.data.obj.money=m
   },
   //备注变化时
   onDescChange:function(event){
     var d=event.detail
-    this.setData({
-     desc:d
-   })
+    this.data.obj.desc=d
   },
   //新增方法
   callAdd:function(){
-    var item_name=this.data.item_name
-    var money=this.data.money
-    var addDate=this.data.addDate 
-    var desc=this.data.desc
-    var item_type=this.data.item_type
-    if(item_type==='O'){
-      money='-'+money
+   // console.log(this.data.obj)
+    var that=this.data.obj
+    that.item_name=this.data.item_name
+    that.item_type=this.data.item_type
+    if(that.item_type==='O'){
+      that.money='-'+that.money
+      that.item_name=this.data.item_name || this.data.Olist[0].type
+    }else{
+      that.item_name=this.data.item_name || this.data.Ilist[0].type
     }
-    if(!item_name||!money||!addDate){
+    if(!that.item_name||!that.money||!that.addDate){
         Dialog.alert({
           title: '注意',
           message: '金额、类目、日期不能为空值！',
@@ -121,14 +130,12 @@ Page({
           // 云函数名称
           name: 'add',
           // 传给云函数的参数
-          data: {
-            item_type:item_type,
-            money:money,
-            addDate:addDate,
-            desc:desc,
-            item_name:item_name
-          },
+          data: that,
           complete: res => {
+             this.setData({
+               obj:{},
+               addDate:""
+             })
             if(res.result._id){
                //回到上一页
               wx.navigateBack({
@@ -168,6 +175,7 @@ Page({
       })
       this.callGetItemType()
     }
+  
   },
   /**
    * 生命周期函数--监听页面隐藏

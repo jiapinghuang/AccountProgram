@@ -11,17 +11,18 @@ exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
   return await db.collection('Item').where({
       openid: wxContext.OPENID,
-      del: false
+      del: false,
+      IO:event.IO
   }).field({
-    text: true,
-    value:true,
+    type: true,
+    IO:true,
     item_desc:true,
     _id:true
   })
   .get({
     success: function(res) {
       // res.data 是包含以上定义的两条记录的数组
-      console.log(res.data)
+      // console.log(res.data)
     }
   })
 }
