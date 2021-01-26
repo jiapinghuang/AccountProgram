@@ -4,6 +4,7 @@ const dateUtil=require('../util/Date.js')
 const date = new Date();
 const year = date.getFullYear();
 const month = date.getMonth()+1;
+import arrUtil from '../util/arrUtil.js';
 import Dialog from '/@vant/weapp/dialog/dialog';
 Page({
   /**
@@ -16,10 +17,9 @@ Page({
     selectDate:dateUtil.selectDate,
     OMmoney:0,//某月统计
     IMmoney:0,
-    ODmoney:0,//某天统计
-    IDmoney:0,
-    IaccountDetail:[],//账本信息数组
-    OaccountDetail:[],
+    Isum:0,//某天统计
+    Osum:0,
+    accountDetail:[],//总账本信息
     overlayShow: true //遮罩层控制
     
   },
@@ -40,7 +40,6 @@ Page({
   //call云函数，按天查找
   callSelectAccount:function(){
     var selectDate=this.data.selectDate
-    console.log(selectDate)
     wx.cloud.callFunction({
       // 云函数名称
       name: 'selectByDay',
@@ -56,26 +55,27 @@ Page({
   },
   //展示账本信息
   showDayDetail:function(obj) {
-    this.calulateMMoney(obj,"d")
-    let Iarr=[]
-    let Oarr=[]
-    obj.forEach(item=>{
-      if(item.item_type==="O"){
-        Iarr.push(item)
+   // this.calulateMMoney(obj,"d")
+   let Isum=0;
+   let Osum=0;
+    let arr=arrUtil.GroupByArr(obj,"item_name")
+    arr.filter((item)=>{
+      if(item<0){
+        Osum=Osum-item.count
       }else{
-        Oarr.push(item)
-      }    
+        Isum=Isum+item.count
+      }
     })
     this.setData({
-      IaccountDetail:Iarr,
-      OaccountDetail:Oarr
+      accountDetail:arr,
+      Isum:Isum,
+      Osum:Osum
     })
   }
   ,
   callSelectCurrentMon:function(){
     var minDate=dateUtil.formatDate(this.data.minDate)
     var maxDate=dateUtil.formatDate(this.data.maxDate)
-    console.log(minDate)
     wx.cloud.callFunction({
       // 云函数名称
       name: 'selectCurrentMon',
@@ -85,37 +85,26 @@ Page({
         minDate:parseInt(minDate),
         maxDate:parseInt(maxDate) 
       },
-      complete: res => {
-        console.log('callFunction test result: ', res.result.data)      
-        this.calulateMMoney(res.result.data,"m")
+      complete: res => {    
+        let IMsum=0;
+        let OMsum=0;
+        let arr=arrUtil.GroupByArr(res.result.data,"item_name")
+        console.log('arr', arr)     
+          arr.filter((item1)=>{
+             for(let i=0;i<item1.value.length;i++){             
+                if(item1.value[i].money<0){
+                  OMsum=OMsum- parseInt(item1.value[i].money) 
+                }else{
+                  IMsum=IMsum+parseInt(item1.value[i].money)
+                }
+             }            
+          })
+          this.setData({
+            IMsum:IMsum,
+            OMsum:OMsum
+          })
       }
     })
-  },
-
-  //计算金额收支
-  calulateMMoney:function(obj,type) {
-    //数组按IO分类
-    var Omoney=0
-    var Imoney=0
-    obj.forEach(item=>{
-      if(item.item_type==="O"){
-        Omoney-=parseInt(item.money)
-      }else{
-        Imoney+=parseInt(item.money)
-      }    
-    })
-    if(type==="m"){
-      this.setData({
-        OMmoney:Omoney,
-        IMmoney:Imoney
-      })
-    }else{
-      this.setData({
-        ODmoney:Omoney,
-        IDmoney:Imoney
-      })
-    }
-   
   },
   addAccount:function(){
     //跳转到新增页面
@@ -152,8 +141,8 @@ Page({
       this.setData({
         overlayShow:false
       })
-    this.callSelectCurrentMon()
-   // this.callSelectAccount()
+      this.callSelectCurrentMon()
+      this.callSelectAccount()
     }
   }
 })

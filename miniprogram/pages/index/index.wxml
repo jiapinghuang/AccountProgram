@@ -1,60 +1,61 @@
 
-<view class="item_container bg">
-  <view class="item">
-    <view>本月收入</view>
-    <view>{{IMmoney}}</view>
+<view class="header">
+  <view class="header_hd">   
+    <view class="header_hd_num">{{IMsum-OMsum}}</view>
+    <view>当前盈亏</view>
   </view>
-  <view class="item">
-    <view>本月支出</view>
-    <view>{{OMmoney}}</view>
-  </view>
+  <view class="header_bd">
+    <view class="item border">
+      <view class="item_time">本月收入</view>
+      <view>{{IMsum}}</view>
+    </view>
+    <view class="item">   
+      <view class="item_time">本月支出</view> 
+      <view>{{OMsum}}</view>
+    </view>
+  </view> 
+
 </view>
 
-<van-cell title="按日期" value="{{ selectDate }}" bind:click="onDisplay" />
+<!-- 今日查询 -->
+<view class="search">
+  <view class="search_date">{{ selectDate }}</view>
+  <view class="search_money" wx:if="{{Isum}}">{{Isum}}¥</view>
+  <view class="search_money" wx:if="{{Osum}}">{{Osum}}¥</view>
+  <view><image src="../asset/search.png" bindtap="onDisplay"></image></view>
+</view>
+<!-- 日期 -->
   <van-calendar show="{{ show }}" bind:close="onClose" bind:confirm="onConfirm"
   min-date="{{ minDate }}" default-date='{{defaultDate}}' max-date='{{maxDate}}'
-  />
-<view>
-  <view class="item_container">
-    <view class="item">
-      <view class="item_1">{{selectDate}}</view> 
-      <view class="item_1">总收入:{{IDmoney}}</view>
-      <view class="item_1">总支出:{{ODmoney}}</view>
-    </view>
-   
-  </view>
-  <view wx:for="{{IaccountDetail}}" class="item_container">
-    <view class="item">
-      <view class="item_1">{{item.item_name}}</view>
-      <view class="item_1">{{item.money}}</view>
-    </view>
-  </view>
-  <view class="item_container" wx:for="{{OaccountDetail}}">
-    <view class="item">
-       <view class="item_1">{{item.item_name}}</view>
-       <view class="item_1 O">{{item.money}}</view>
-    </view>
-  </view>
+  /> 
 
-  <!-- <view class="item_container">
-    <view class="item">
-       <view class="item_1">美容</view>
-       <view class="item_1">390</view>
+<!-- 数据显示 -->
+<view class="list"  wx:for="{{accountDetail}}">  
+    <view class="item">  
+      <view class="list_hd" >
+          <view class="title">{{item.key}}</view>
+          <view class="sum">{{item.count}}¥</view>
+      </view>
+      <view class="list_bd"  wx:for="{{item.value}}"> 
+          <view>{{item.desc}}</view>
+          <view>{{item.money}}</view>
+      </view>
     </view>
-  </view> -->
 </view>
-<view class="item_container" wx:if="{{IaccountDetail==false & OaccountDetail==false}}">
-      <view class="item item_1">当天没有任何记录~</view>
+
+
+<!-- 没有记录 -->
+<view class="nolist" wx:if="{{accountDetail.length<=0}}">
+      <view class="">当天没有任何记录~</view>
 </view>
+<!-- 遮罩 -->
 <view class="{{overlayShow ? 'mask':'dd'}}" bindtap="onLoginTip"></view>
+<!-- 提示框 -->
 <van-dialog id="van-dialog" />
-
 <!-- 新增按钮 -->
 <view class="addIcon"> 
     <navigator class="nav" url="/pages/count/count">
-      <van-icon name="add"  size="50px" color="cadetblue"></van-icon>
+      <van-icon name="add"  size="50px" color="tomato"></van-icon>
     </navigator>
 </view>
 
-
-<!-- <button bindtap="test">call-当月份总收入</button> -->
