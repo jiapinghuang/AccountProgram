@@ -25,19 +25,19 @@
         "pagePath": "pages/index/index",
         "text": "首页",
         "iconPath": "pages/asset/tab/home.png",
-        "selectedIconPath": "pages/asset/tab/home-active.png"
+        "selectedIconPath": "pages/asset/tab/home_ac.png"
       },
       {
         "pagePath": "pages/statistics/statistics",
         "text": "统计",
         "iconPath": "pages/asset/tab/count.png",
-        "selectedIconPath": "pages/asset/tab/count-act.png"
+        "selectedIconPath": "pages/asset/tab/count_ac.png"
       },
       {
         "pagePath": "pages/mine/mine",
         "text": "我的",
-        "iconPath": "pages/asset/tab/profile.png",
-        "selectedIconPath": "pages/asset/tab/profile-active.png"
+        "iconPath": "pages/asset/tab/mine.png",
+        "selectedIconPath": "pages/asset/tab/mine_ac.png"
       }
     ]
   },

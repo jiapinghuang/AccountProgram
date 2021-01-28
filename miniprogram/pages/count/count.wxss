@@ -1,33 +1,4 @@
-/* miniprogram/pages/count/count.wxss */
-.grids{
-  display: flex;
-  flex-wrap: wrap;
-  border-top: 2rpx solid #f5f5f5;
-  border-bottom: 2rpx solid #f5f5f5;
-  border-left: 2rpx solid #f5f5f5;
-  margin-left: 30rpx;
-}
-.grids .item{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 24%;
-  height: 100rpx;
-  border-right: 2rpx solid #f5f5f5;
-  border-bottom: 2rpx solid #f5f5f5;
-  box-sizing: border-box;/*不将边框算进盒子宽度*/
-}
-.grids .item text {
-  color: #888;
-  font-size: 28rpx;
-}
-.item .selected{
-  background-color:greenyellow;
-}
-.item .unselected{
-  background-color:white;
-}
+
 /* 遮罩 */
 .mask{
   width:100%;
@@ -49,8 +20,10 @@
   background-color: rgb(122, 126, 116);
 }
 .itemList{
-  padding:15rpx;
+  padding:10rpx 20rpx;
   border-radius: 35rpx;
-  font-size: 24rpx;
+  font-size: 20rpx;
   color: white;
+  box-sizing: border-box;
 }
+/* 新增图表样式 */

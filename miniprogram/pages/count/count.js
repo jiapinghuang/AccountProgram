@@ -30,6 +30,14 @@ Page({
       //选项卡
       curIndex:0
   },
+  clickUrl:function(e){
+    var data=e.currentTarget.dataset.type
+    //console.log(data.detail)
+    //跳转带参
+    wx.navigateTo({
+      url:"/pages/item/item?IO="+data
+    })
+  },
   //tab卡
   onClick(event) {
     this.setData({

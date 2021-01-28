@@ -7,14 +7,13 @@ Page({
    */
   data: {
     type:"",
-    text:'',
+    IO:'',
     item_desc:''
   },
-   //金额变化时
-   onTextChange:function(event){
+   ontypeChange:function(event){
     var t=event.detail
     this.setData({
-      text:t
+      type:t
    })
  },
  //备注变化时
@@ -25,9 +24,9 @@ Page({
   })
  },
   callAdd:function(){
-    var text=this.data.text
+    var type=this.data.type
     var item_desc=this.data.item_desc
-    if(!text||!item_desc){
+    if(!type||!item_desc){
         console.log("至少有一项为空值")
     }else{
       try{
@@ -36,17 +35,17 @@ Page({
           name: 'addItem',
           // 传给云函数的参数
           data: {
-            text:text,
-            item_desc:item_desc
+            type:type,
+            item_desc:item_desc,
+            IO:this.data.IO
           },
           complete: res => {
-            console.log('callFunction test result: ', res)
-            Notify({ type: 'success', message: '添加成功' })
-            //回到上一页
-            wx.navigateBack({
-              delta: 1
-            })
-            //
+            if(res.result._id){
+              //回到上一页
+             wx.navigateBack({
+                 delta: 1
+             })
+           } 
           }
         })
       }catch(err){
@@ -59,8 +58,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options.IO)
     this.setData({
-      type: options.type
+      IO:options.IO
     })
   },
 

@@ -23,8 +23,7 @@ function GroupByArr(groupArr,column_name){
         }      
       })
       newArr.filter((item)=>{
-        var str=item.addDate+''
-        console.log(str)
+        var str=item.addDate +''
          return item.addDate= str.substring(0,4)+'年'+str.substring(4,6)+'月'+str.substring(6,10)+'日'
       })
       console.log(newArr)

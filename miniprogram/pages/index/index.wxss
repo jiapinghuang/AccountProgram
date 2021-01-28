@@ -1,7 +1,6 @@
 /* miniprogram/pages/index/index.wxss */
 .count{
   height: 150rpx;
-  background-color:tomato; 
   display: flex;
   align-items: center;
   justify-items: center;
@@ -10,8 +9,8 @@
 }
 .addIcon{
   position: fixed;
-  bottom: 20rpx;
-  right: 35rpx;
+  bottom: -10rpx;
+  right: 43%;
 }
 
 .header{
@@ -36,7 +35,6 @@
 
 /*本月支出收入样式**/
 .header_bd{
-  /* background-color: hotpink; */
   height: 200rpx;
   margin: 0 auto;
   overflow: hidden;
@@ -46,7 +44,6 @@
   justify-content: space-around;
 }
 .header_bd .item{
-   /* background-color:green;  */
   padding: 0 123rpx;
   display: block;
   text-align: center;
@@ -63,7 +60,7 @@
   height: 60rpx;
   line-height: 60rpx;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between;  
 }
 .search view{
   padding: 0 40rpx;
@@ -87,35 +84,47 @@
 /* 数据列表 */
 .list{
   height: auto;
-  /* background-color: tomato; */
   margin-top: 40rpx;
   margin-left:auto;
   margin-right: auto;
   width: 90%;
-  border-radius: 25rpx;
-  box-shadow: 5rpx 5rpx 5rpx 5rpx rgba(245, 163, 125, 0.281);
+  box-shadow: 2rpx 2rpx 2rpx rgba(10, 10, 10, 0.2);
 }
 .item .list_hd{
-  height: 100rpx;
-  line-height: 100rpx;
-  color:tomato;
-  font-size: 38rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  color:#009999;
+  font-size: 32rpx;
   font-weight: bold;
   display: flex;
   justify-content: space-between;
   padding: 0 40rpx;
+  border-top:2rpx solid #e2dede;
+  border-left:2rpx solid #e2dede;
 }
 .item .list_bd{
   display: flex;
   padding: 0 40rpx;
-  height: 100rpx;
-  line-height: 100rpx;
+  height: 50rpx;
+  line-height: 50rpx;
   justify-content: space-between;
+  border-top:2rpx solid #e2dede;
+  border-left:2rpx solid #e2dede;
 }
 /* 没有数据时 */
 .nolist{
   height: 400rpx;
   line-height: 400rpx;
-  /* background-color: #f5f5f5; */
   text-align: center;
+}
+/* 遮罩样式 */
+.mask{
+  width:100%;
+  height:100%;
+  position:absolute;
+  background-color:rgb(12, 12, 12);
+  z-index:2;
+  top:0;
+  left:0;
+  opacity:0.5;
 }

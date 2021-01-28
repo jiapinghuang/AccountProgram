@@ -27,7 +27,7 @@ page{
 .userDetail{
   text-align: center;
   /* color:white; */
-  font-size: 34rpx;
+  /* font-size: 34rpx; */
   font-weight: bold;
 }
 /* list样式 */
@@ -38,12 +38,14 @@ page{
   margin-left: auto;
   margin-right: auto;
   background-color:white;
-  height: 200rpx;
-  border-radius: 15rpx;
+  border-top:2rpx solid #e2dede;
+  border-left:2rpx solid #e2dede;
 }
 .content view{
   height: 80rpx;
   line-height: 80rpx;
-  box-shadow: 2rpx 2rpx 2rpx 2rpx rgba(68, 67, 66, 0.1);
+  border-right:2rpx solid #e2dede;
+  border-bottom:2rpx solid #e2dede;
   padding-left: 20rpx;
 }
+

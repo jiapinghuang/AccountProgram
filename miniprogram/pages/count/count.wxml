@@ -2,13 +2,14 @@
 <van-tabs type="card" bind:click="onClick" color="tomato" title-active-color="white">
         <van-tab title="收入" >
               <!-- 记账分类   -->
-              <van-grid column-num="6" border="{{ false }}">
+              <van-grid column-num="5" border="{{ false }}">
                 <van-grid-item use-slot wx:for="{{ Ilist }}">
                     <view data-itemname="{{item.type}}" bindtap="clickItemType"  data-index="{{index}}"
                     class="itemList  {{ curIndex ==index?' actives':' unactives'}}">
                       {{item.type}}
-                    </view>
+                    </view>               
                 </van-grid-item>
+                <van-grid-item url="pages/item/item" data-type="I" bind:click="clickUrl" icon="plus" text="" />
               </van-grid>
               <!-- 记账分类   -->
               <van-cell-group icon-size="14px">
@@ -33,13 +34,14 @@
         </van-tab>
         <van-tab title="支出">
                <!-- 记账分类   -->
-               <van-grid column-num="6" border="{{ false }}">
+               <van-grid column-num="5" border="{{ false }}">
                 <van-grid-item use-slot wx:for="{{ Olist }}">
                     <view data-itemname="{{item.type}}" bindtap="clickItemType"  data-index="{{index}}"
                     class="itemList  {{ curIndex ==index?' actives':' unactives'}}">
                       {{item.type}}
-                    </view>
+                    </view>                   
                 </van-grid-item>
+                <van-grid-item url="pages/item/item" data-type="O" bind:click="clickUrl" icon="plus" text="" />
               </van-grid>
               <!-- 记账分类   -->
               <van-cell-group icon-size="14px">

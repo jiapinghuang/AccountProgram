@@ -3,12 +3,16 @@
 <view>3、我的——扩展模块：新冠肺炎疫情监控模块</view> -->
 
 <view wx:if="{{!isLogin}}">
-  <view class="logo">
-      <image src=""></image>
-      <view class="userDetail">
-        <van-button type="primary" block wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</van-button>
-      </view> 
-  </view>
+    <view class="logo">
+        <image src="../asset/logo.jpg"></image>
+        <view class="userDetail">
+          <van-button type="primary" block wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</van-button>
+        </view> 
+    </view>
+    <view class="content">
+      <view>删除我的所有数据</view>
+      <view>查看所有记帐</view>
+    </view>
 </view>
 
 <view wx:if="{{isLogin}}">
@@ -25,7 +29,6 @@
 <view class="content">
     <view bindtap="delclick">删除我的所有数据</view>
     <view bindtap="clickUrl">查看所有记帐</view>
-    <view>其他</view>
 </view>
 </view>
 

@@ -230,8 +230,10 @@ Page({
     
   },
   onReady: function (e) {
-    //加载图表开发工具会死机，需要删除重启
-    this. selectDateRang()
+    console.log(this.data.arrObjI.length)
+    if(this.data.arrObjI.length<=0&&this.data.arrObjO.length<=0){
+      this.selectDateRang()
+    }
   },
   onShow:function(){
     var cover=LoginUtil.getOverlayShowStorge()

@@ -1,19 +1,27 @@
-/* miniprogram/pages/list/list.wxss */
-
-.account{ 
+ 
+.account .content{ 
   margin-left: 40rpx;
   height: 80rpx;
   width: 90%;
-  /* box-shadow: 2rpx 2rpx 2rpx rgba(26, 6, 6, 0.281); */
+  text-align: center;
   line-height: 80rpx;
   overflow: auto;
   display: flex;
   justify-content:space-around;
   color: rgb(58, 54, 54);
   font-size: 28rpx;
+  border-top:2rpx solid #e2dede;
+  border-left:2rpx solid #e2dede;
+  
 }
-.account view{
- width: auto;
+.account .content view{
+ width: 20%;
  display: inline-block;
- margin-bottom: 12rpx;
+ border-right: 2rpx solid #e2dede;
+}
+.account .content view:nth-child(2){
+  width: 40%;
+}
+.account:last-child .content{
+ border-bottom:2rpx solid #e2dede;
 }

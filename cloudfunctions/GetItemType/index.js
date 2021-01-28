@@ -10,7 +10,6 @@ const _ = db.command
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
   return await db.collection('Item').where({
-      openid: wxContext.OPENID,
       del: false,
       IO:event.IO
   }).field({

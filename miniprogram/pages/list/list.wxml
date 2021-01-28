@@ -1,16 +1,11 @@
-<!--miniprogram/pages/list/list.wxml-->
-<!-- <text>miniprogram/pages/list/list.wxml</text> -->
-<!-- <view wx:for="{{dataObj}}">
-  <view wx:for="{{item.detail}}">
-      {{item.item_name}}
-  </view>
-</view> -->
-
-<view  >
+<!-- <view> -->
   <view wx:for="{{dataObj}}"  class="account">
-    <view> {{item.item_name}}</view>
-    <view> {{item.addDate}}</view>
-    <view> {{item.money}}</view>
-    <view> {{item.desc}}</view>
-  </view>
-</view>
+    <view class="content">
+        <view> {{index+1}}</view>
+        <view> {{item.addDate}}</view>
+        <view> {{item.money}}</view>
+        <view> {{item.desc}}</view>
+    </view>
+   </view>
+<!-- </view> -->
+
