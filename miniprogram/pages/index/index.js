@@ -21,7 +21,6 @@ Page({
     Osum:0,
     accountDetail:[],//总账本信息
     overlayShow: true //遮罩层控制
-    
   },
   //日期开始
   onDisplay() {
@@ -88,8 +87,8 @@ Page({
       complete: res => {    
         let IMsum=0;
         let OMsum=0;
+        if(res.result.length<=0) return false
         let arr=arrUtil.GroupByArr(res.result.data,"item_name")
-        console.log('arr', arr)     
           arr.filter((item1)=>{
              for(let i=0;i<item1.value.length;i++){             
                 if(item1.value[i].money<0){
@@ -122,8 +121,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
-    //util.checkSession(); 
+
   },
   onLoginTip:function(){
     Dialog.alert({

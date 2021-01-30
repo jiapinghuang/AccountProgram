@@ -9,6 +9,7 @@
     "van-col": "@vant/weapp/col/index",
     "van-dialog": "@vant/weapp/dialog/index",
     "van-tab": "@vant/weapp/tab/index",
-    "van-tabs": "@vant/weapp/tabs/index"
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-empty": "@vant/weapp/empty/index"
   }
 }

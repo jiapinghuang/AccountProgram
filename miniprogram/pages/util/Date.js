@@ -7,7 +7,7 @@ function GetCurrentDate(){
   var d = new Date(year, month, 0);
   return d.getDate();
 }
-
+//格式化为01
 function changeNum(num){
   var res=num
   if(num<10){
@@ -28,7 +28,6 @@ function getMaxDate(y,m) {
   var date=new Date(y, m-1, d.getDate()).getTime()
   return date
 }
-
 function getCurrentDate(type){
   var date = new Date();
   var year = date.getFullYear();
@@ -49,8 +48,6 @@ function getCurrentDate(type){
   }
   return str;
 }
-
-
 //格式化日期20210115
 function formatDate(date){
   date = new Date(date);  

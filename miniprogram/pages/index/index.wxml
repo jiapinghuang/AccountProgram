@@ -46,7 +46,7 @@
 
 <!-- 没有记录 -->
 <view class="nolist" wx:if="{{accountDetail.length<=0}}">
-      <view class="">当天没有任何记录~</view>
+    <van-empty  class="custom-image" description="一点东西都没有哦~"></van-empty>
 </view>
 <!-- 遮罩 -->
 <view class="{{overlayShow ? 'mask':'dd'}}" bindtap="onLoginTip"></view>

@@ -9,19 +9,27 @@ const _ = db.command
 // 云函数入口函数
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
-  return await db.collection('Item').where({
+  const result = await Promise.all([  
+  db.collection('ItemCom').where({
+        del: false,
+        IO:event.IO
+    }).field({
+      type: true,
+      IO:true,
+      item_desc:true,
+      _id:true
+    })
+    .get(),db.collection('Item').where({
       del: false,
-      IO:event.IO
-  }).field({
-    type: true,
-    IO:true,
-    item_desc:true,
-    _id:true
-  })
-  .get({
-    success: function(res) {
-      // res.data 是包含以上定义的两条记录的数组
-      // console.log(res.data)
-    }
-  })
+      IO:event.IO,
+      openid:wxContext.OPENID
+    }).field({
+      type: true,
+      IO:true,
+      item_desc:true,
+      _id:true
+    })
+    .get()
+    ])
+    return result
 }

@@ -3,8 +3,6 @@ const LoginUtil=require('../util/checkLogin.js')
 var Charts = require('../util/wxcharts-min.js');
 const dateUtil=require('../util/Date.js')
 const ArrUtil=require('../util/arrUtil.js')
-const colorI=['#ADD8E6','#F08080','#E0FFFF','#7CFC00','#FFFACD']
-const colorO=['#8B4513','#FA8072','#F4A460','#2E8B57','#708090']
 import Dialog from '/@vant/weapp/dialog/dialog';
 const date = new Date();
 const year = date.getFullYear();
@@ -137,20 +135,22 @@ Page({
       });
     }else{    
       //分别拿到支出收入数组
-      this.callSelectRangDate(minDate,maxDate,'I',colorI)
-      this.callSelectRangDate(minDate,maxDate,'O',colorO)  
+      this.callSelectRangDate(minDate,maxDate,'I')
+      this.callSelectRangDate(minDate,maxDate,'O')  
     }
    
   },
   showCanvas:function(newArr,canvas){
-    new Charts({
-      canvasId: canvas,
-      type: 'pie',
-      series:newArr,
-      width:250,
-      height: 250,
-      dataLabel: true
-    });
+    if(newArr.length<=0) return false;
+      new Charts({
+        canvasId: canvas,
+        type: 'pie',
+        series:newArr,
+        width:250,
+        height: 250,
+        dataLabel: true
+      });
+   
   },
   //自定义组件2
   onLoad:function(e){
@@ -164,8 +164,7 @@ Page({
       // on close
     });
   },
-  callSelectRangDate:function(minDate,maxDate,item_type,color){
-   
+  callSelectRangDate:function(minDate,maxDate,item_type){
     wx.cloud.callFunction({
       // 云函数名称
       name: 'SelectRangDate',
@@ -178,22 +177,25 @@ Page({
       },
       complete: res => {
         let arr=[]
+        console.log("res:",res)
         if(res.result.data.length>0){
-            arr=ArrUtil.GroupByArr(res.result.data,"item_name")      
+            arr=ArrUtil.GroupByArr(res.result.data,"item_name")  
+            console.log("arr:",arr)    
             const newArr=[]
-            const colorArr=color
             for(let i=0;i<arr.length;i++){          
               //count 总数
               newArr.push({
                 "name":arr[i].key,
                 "data":Math.abs(arr[i].count) ,
-                "color":colorArr[i],
+                "color":this.color16(),
                 "sum":arr[i].sum,
                 "index":arr[i].index,
                 "detail":arr[i].value
               })
             }
-            if(this.data.arrObjI.length==0){
+            //第一次加载时，画图
+            if(this.data.arrObjI.length==0 & newArr.length>0){
+              console.log("画图")
               this.showCanvas(newArr,'canvas1')
             }          
             if(item_type=="I"){
@@ -213,13 +215,13 @@ Page({
             this.setData({
               message:"没有记账记录~",
               showtab:false,
-              arrObjI:null
+              arrObjI:[]
             })
           }else{
             this.setData({
               message:"没有记账记录~",
               showtab:false,
-              arrObjO:null
+              arrObjO:[]
             })
           } 
         } 
@@ -228,6 +230,16 @@ Page({
     })
 
     
+  },
+  color16:function(){//rgb颜色随机
+    var r = Math.floor(Math.random()*256);
+    var g = Math.floor(Math.random()*256); 
+    var b = Math.floor(Math.random()*256); 
+    var rs = r.toString(16); var gs = g.toString(16);
+    var bs = b.toString(16); if(rs.length<2) rs = "0"+rs; 
+    if(gs.length<2) gs = "0"+gs;
+    if(bs.length<2) bs = "0"+bs; 
+    return '#' + rs + gs + bs; 
   },
   onReady: function (e) {
     console.log(this.data.arrObjI.length)
@@ -244,7 +256,8 @@ Page({
       //加载图表 默认统计当月
       let minDate=dateUtil.formatDate(this.data.minDate) 
       let maxDate=dateUtil.formatDate(this.data.defaultDate)
-    //  this.SelectRangDate(minDate,maxDate)   
+      this.callSelectRangDate(minDate,maxDate,'I')   
+      this.callSelectRangDate(minDate,maxDate,'O')   
       this.setData({
         min:minDate,
         max:maxDate

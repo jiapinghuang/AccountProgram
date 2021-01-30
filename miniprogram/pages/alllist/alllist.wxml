@@ -10,7 +10,11 @@
           <view class="middle">
               {{ item.addDate }}
           </view>
-          <view class="right">{{item.money}}</view>
+          <view class="right">{{item.money}}¥</view>
       </view>
     </view>
+</view>
+<view wx:if="{{accountDetail.length<=0}}">
+    <van-empty  class="custom-image" description="一点东西都没有哦~">
+    </van-empty>
 </view>

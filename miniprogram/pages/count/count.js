@@ -81,18 +81,20 @@ Page({
       // 云函数名称
       name: 'GetItemType',
       complete: res => {
-        // console.log('itemlist ', res.result.data)
-        if(res.result.data.length>0){
-          let arr=arrUtil.GroupByArr(res.result.data,"IO")
-          // console.log(arr)
-           for(let i=0;i<arr.length;i++){
-             if(arr[i].key==='O'){
+        if(res.result.length>0){
+          let a1=res.result[0].data
+          let a2=res.result[res.result.length-1].data
+          let a3=[...a1,...a2]
+          let arr1=arrUtil.GroupByArr(a3,"IO")
+           for(let i=0;i<arr1.length;i++){
+             if(arr1[i].key==='O'){
+               console.log(arr1[i].value)
                 this.setData({
-                   Olist:arr[i].value
+                   Olist:arr1[i].value
                 })
              }else{
                 this.setData({
-                   Ilist:arr[i].value
+                   Ilist:arr1[i].value
                 })
              }
            }
@@ -100,8 +102,7 @@ Page({
         }
         
       }
-    })
-    
+    })  
   },
   //金额变化时
   onMoneyChange:function(event){
