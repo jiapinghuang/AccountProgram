@@ -202,24 +202,25 @@ Page({
               this.setData({
                 arrObjI:newArr,
                 showtab:true,
-                message:''
+                messageI:''
               })
             }else{
               this.setData({
                 arrObjO:newArr,
-                showtab:true
+                showtab:true,
+                messageO:''
               })
             } 
         }else{
           if(item_type=="I"){
             this.setData({
-              message:"没有记账记录~",
+              messageI:"没有记账记录~",
               showtab:false,
               arrObjI:[]
             })
           }else{
             this.setData({
-              message:"没有记账记录~",
+              messageO:"没有记账记录~",
               showtab:false,
               arrObjO:[]
             })

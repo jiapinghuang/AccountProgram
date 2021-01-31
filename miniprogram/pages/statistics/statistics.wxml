@@ -75,12 +75,12 @@
   </view> -->
 
 <view class="message">
-  <van-empty wx:if="{{message}}"class="custom-image" description="一点东西都没有哦~">
-    </van-empty>
+  <van-empty wx:if="{{messageI && messageO}}"class="custom-image" description="一点东西都没有哦~">
+  </van-empty>
 </view>
-<canvas canvas-id="canvas1" class="canvas {{riliShow && canShow ?' ':' canvasBox'}}" wx:if="{{!message}}">
+<canvas canvas-id="canvas1" class="canvas {{riliShow && canShow ?' ':' canvasBox'}}" wx:if="{{!messageI}}">
 </canvas>
-<canvas canvas-id="canvas2" class="canvas {{riliShow && canShow ?'canvasBox':''}}" wx:if="{{!message}}">
+<canvas canvas-id="canvas2" class="canvas {{riliShow && canShow ?'canvasBox':''}}" wx:if="{{!messageO}}">
 </canvas>
 
 
