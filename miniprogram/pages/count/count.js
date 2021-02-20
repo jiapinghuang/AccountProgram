@@ -97,10 +97,8 @@ Page({
                    Ilist:arr1[i].value
                 })
              }
-           }
-       
-        }
-        
+           }      
+        }       
       }
     })  
   },

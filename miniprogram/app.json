@@ -12,7 +12,7 @@
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "云开发记账本",
+    "navigationBarTitleText": "牛小牛记账",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {

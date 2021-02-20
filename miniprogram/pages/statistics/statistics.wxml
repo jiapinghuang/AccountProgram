@@ -62,18 +62,6 @@
     <view class="riliContent"><button bindtap="selectDateRang" >查询</button></view>
 </view>
 
-<!-- 自定义日历组件 -->
-  <!-- <view class="rili">
-    <view class="year">
-      <view wx:for="{{years}}" data-year="{{item}}" bindtap="clickYear">
-        {{item}}
-      </view>   
-    </view>
-    <view class="month">
-      <view wx:for="{{months}}" data-mon="{{item}}" bindtap="clickMon"> {{item}}</view>
-    </view>
-  </view> -->
-
 <view class="message">
   <van-empty wx:if="{{messageI && messageO}}"class="custom-image" description="一点东西都没有哦~">
   </van-empty>
@@ -85,7 +73,7 @@
 
 
 <!-- 收入情况 -->
-<van-tabs type="card" wx:if="{{showtab}}" bind:click="clickIO"
+<van-tabs type="card" wx:if="{{arrObjI.length>0 || arrObjO.length>0 }}"  bind:click="clickIO"
  color="tomato" title-active-color="white">
         <van-tab title="收入" wx:if="{{arrObjI.length>0}}">   
             <view class="account" wx:for="{{arrObjI}}" bindtap="clickUrl" data-obj="{{item}}">
@@ -103,16 +91,5 @@
         </van-tab>
 </van-tabs>
 
-
-<van-collapse value="{{ activeNames }}" bind:change="onChange">
-  <van-collapse-item :name="{{item.index+1}}" wx:for="{{arrObj1}}">
-    <view slot="title" class="title">
-      {{item.name}}
-      <view>总金额:{{item.data}}¥</view> 
-      <view>{{item.sum}}笔</view></view>
-    <view>
-    </view>
-  </van-collapse-item>
-</van-collapse>
 <van-dialog id="van-dialog" />
 <view class="{{overlayShow ? 'mask':'dd'}}" bindtap="onLoginTip"></view>

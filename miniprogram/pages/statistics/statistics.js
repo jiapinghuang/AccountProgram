@@ -15,13 +15,12 @@ Page({
     canShow:true,
     arrObjI:[], //时间段数据
     arrObjO:[],
-    showtab:false,//显示tab选项卡
     minDate:dateUtil.getMinDate(year,month),
     defaultDate:new Date().getTime(),
     activeNames: ['1'], //折叠面板参数
     overlayShow:true,
     //日历组件数据
-    years:['2021','2020','2019','2018'],
+    years:[year-1,year-2,year-3,year-4],
     months:['1','2','3','4','5','6','7','8','9','10','11','12'],
     tempMinyear:year,//临时年
     tempMinmon:month, //临时月
@@ -53,7 +52,6 @@ Page({
   },
   clickUrl:function(e){
     var data=e.currentTarget.dataset.obj
-    //console.log(data.detail)
     //跳转带参
     wx.navigateTo({
       url:"/pages/list/list?arr="+JSON.stringify(data.detail),   
@@ -61,14 +59,12 @@ Page({
   },
   //自定义日历组件
   clickMinYear(event){
-    console.log("点击year")
     this.setData({
       tempMinyear:event.currentTarget.dataset.year,
       tempMinIndex:event.currentTarget.dataset.index
     })
   },
   clickMinMon(event){
-    console.log("点击mon")
     this.setData({
       tempMinmon:event.currentTarget.dataset.mon
     })
@@ -77,7 +73,6 @@ Page({
     this.setData({ riliShow:true});
   },
   comfirmMinFun(){
-    console.log("确认")
     //将临时year mon 存储到正式区
     this.setData({
       confirmMinYear:this.data.tempMinyear,
@@ -137,8 +132,7 @@ Page({
       //分别拿到支出收入数组
       this.callSelectRangDate(minDate,maxDate,'I')
       this.callSelectRangDate(minDate,maxDate,'O')  
-    }
-   
+    } 
   },
   showCanvas:function(newArr,canvas){
     if(newArr.length<=0) return false;
@@ -154,8 +148,7 @@ Page({
   },
   //自定义组件2
   onLoad:function(e){
-    
-    
+       
   },
   onLoginTip:function(){
     Dialog.alert({
@@ -177,10 +170,8 @@ Page({
       },
       complete: res => {
         let arr=[]
-        console.log("res:",res)
         if(res.result.data.length>0){
-            arr=ArrUtil.GroupByArr(res.result.data,"item_name")  
-            console.log("arr:",arr)    
+            arr=ArrUtil.GroupByArr(res.result.data,"item_name")     
             const newArr=[]
             for(let i=0;i<arr.length;i++){          
               //count 总数
@@ -195,19 +186,16 @@ Page({
             }
             //第一次加载时，画图
             if(this.data.arrObjI.length==0 & newArr.length>0){
-              console.log("画图")
               this.showCanvas(newArr,'canvas1')
             }          
             if(item_type=="I"){
               this.setData({
                 arrObjI:newArr,
-                showtab:true,
                 messageI:''
               })
             }else{
               this.setData({
                 arrObjO:newArr,
-                showtab:true,
                 messageO:''
               })
             } 
@@ -215,22 +203,17 @@ Page({
           if(item_type=="I"){
             this.setData({
               messageI:"没有记账记录~",
-              showtab:false,
               arrObjI:[]
             })
           }else{
             this.setData({
               messageO:"没有记账记录~",
-              showtab:false,
               arrObjO:[]
             })
           } 
         } 
-      }
-     
-    })
-
-    
+      } 
+    })   
   },
   color16:function(){//rgb颜色随机
     var r = Math.floor(Math.random()*256);
@@ -243,10 +226,10 @@ Page({
     return '#' + rs + gs + bs; 
   },
   onReady: function (e) {
-    console.log(this.data.arrObjI.length)
-    if(this.data.arrObjI.length<=0&&this.data.arrObjO.length<=0){
-      this.selectDateRang()
-    }
+    this.selectDateRang()
+    // if(this.data.arrObjI.length<=0&&this.data.arrObjO.length<=0){
+    //   this.selectDateRang()
+    // }
   },
   onShow:function(){
     var cover=LoginUtil.getOverlayShowStorge()
