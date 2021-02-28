@@ -63,29 +63,25 @@
 </view>
 
 <view class="message">
-  <van-empty wx:if="{{messageI && messageO}}"class="custom-image" description="一点东西都没有哦~">
+  <van-empty wx:if="{{msg}}"class="custom-image" description="一点东西都没有哦~">
   </van-empty>
 </view>
-<canvas canvas-id="canvas1" class="canvas {{riliShow && canShow ?' ':' canvasBox'}}" wx:if="{{!messageI}}">
-</canvas>
-<canvas canvas-id="canvas2" class="canvas {{riliShow && canShow ?'canvasBox':''}}" wx:if="{{!messageO}}">
-</canvas>
-
-
+<canvas canvas-id="canvas2" class="canvas {{riliShow && canShow ?'canvasBox':''}}" wx:if="{{arrObjO.length>0}}"></canvas>
+<canvas canvas-id="canvas1" class="canvas {{riliShow && canShow ? '':' canvasBox'}}" wx:if="{{arrObjI.length>0}}"></canvas>
 <!-- 收入情况 -->
 <van-tabs type="card" wx:if="{{arrObjI.length>0 || arrObjO.length>0 }}"  bind:click="clickIO"
  color="tomato" title-active-color="white">
         <van-tab title="收入" wx:if="{{arrObjI.length>0}}">   
             <view class="account" wx:for="{{arrObjI}}" bindtap="clickUrl" data-obj="{{item}}">
-                {{item.name}}
-                <view>总金额:{{item.data}}¥</view> 
+                {{item.key}}
+                <view>总金额:{{item.count}}¥</view> 
                 <view>总笔数:{{item.sum}}</view>       
             </view>             
         </van-tab>
         <van-tab title="支出" wx:if="{{arrObjO.length>0}}">
             <view class="account" wx:for="{{arrObjO}}" bindtap="clickUrl" data-obj="{{item}}">
-                {{item.name}}
-                  <view>总金额:{{item.data}}¥</view> 
+                {{item.key}}
+                  <view>总金额:{{item.count}}¥</view> 
                   <view>总笔数:{{item.sum}}</view>
             </view>        
         </van-tab>

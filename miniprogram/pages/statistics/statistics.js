@@ -10,9 +10,10 @@ const month = date.getMonth()+1;
 Page({
   data: {
     showDate: '',
-    show: false,
+    //show: false,
     riliShow:true,//显示日历时，将canvas移到画布外
     canShow:true,
+    msg:false,
     arrObjI:[], //时间段数据
     arrObjO:[],
     minDate:dateUtil.getMinDate(year,month),
@@ -41,13 +42,13 @@ Page({
       this.setData({
         canShow:true
       })
-      this.showCanvas(this.data.arrObjI,'canvas1')
+      this.showCanvas(this.data.ii,'canvas1')
     }else{
       //显示支出图表   
       this.setData({   
         canShow:false
       })
-      this.showCanvas(this.data.arrObjO,'canvas2')
+      this.showCanvas(this.data.oo,'canvas2')
     }
   },
   clickUrl:function(e){
@@ -129,13 +130,12 @@ Page({
         // on close
       });
     }else{    
-      //分别拿到支出收入数组
-      this.callSelectRangDate(minDate,maxDate,'I')
-      this.callSelectRangDate(minDate,maxDate,'O')  
+      //拿到支出收入数组
+      this.callSelectRangDate(minDate,maxDate)
     } 
   },
   showCanvas:function(newArr,canvas){
-    if(newArr.length<=0) return false;
+     if(newArr.length<=0) return false;
       new Charts({
         canvasId: canvas,
         type: 'pie',
@@ -143,8 +143,7 @@ Page({
         width:250,
         height: 250,
         dataLabel: true
-      });
-   
+      }); 
   },
   //自定义组件2
   onLoad:function(e){
@@ -157,7 +156,7 @@ Page({
       // on close
     });
   },
-  callSelectRangDate:function(minDate,maxDate,item_type){
+  callSelectRangDate:function(minDate,maxDate){
     wx.cloud.callFunction({
       // 云函数名称
       name: 'SelectRangDate',
@@ -165,53 +164,73 @@ Page({
       data: {
         //一个月的范围
         minDate:parseInt(minDate),
-        maxDate:parseInt(maxDate),
-        item_type:item_type
+        maxDate:parseInt(maxDate)
       },
       complete: res => {
         let arr=[]
         if(res.result.data.length>0){
-            arr=ArrUtil.GroupByArr(res.result.data,"item_name")     
-            const newArr=[]
-            for(let i=0;i<arr.length;i++){          
-              //count 总数
-              newArr.push({
-                "name":arr[i].key,
-                "data":Math.abs(arr[i].count) ,
-                "color":this.color16(),
-                "sum":arr[i].sum,
-                "index":arr[i].index,
-                "detail":arr[i].value
-              })
+            arr=ArrUtil.GroupByArr(res.result.data,"item_type")   
+            let newArrI=[]
+            let newArrO=[]
+            //遍历newArr，把收入支出按类目分类
+            for(let j=0;j<arr.length;j++){
+                if(arr[j].key=='O'){
+                  newArrO=arr[j].value //支出数据集合             
+                }else{
+                  newArrI=arr[j].value //收入数据集合
+                }
             }
-            //第一次加载时，画图
-            if(this.data.arrObjI.length==0 & newArr.length>0){
-              this.showCanvas(newArr,'canvas1')
-            }          
-            if(item_type=="I"){
+            //支出
+            if(newArrO.length>0){
+              let arr2=ArrUtil.GroupByArr(newArrO,"item_name")
+              let oo=[]
+              for(let i=0;i<arr2.length;i++){          
+                //count 总数
+                oo.push({
+                  "name":arr2[i].key,
+                  "data":Math.abs(arr2[i].count) ,
+                  "color":this.color16(),
+                  "sum":arr2[i].sum,
+                  "index":arr2[i].index
+                })
+              }
               this.setData({
-                arrObjI:newArr,
-                messageI:''
-              })
-            }else{
-              this.setData({
-                arrObjO:newArr,
+                oo:oo,
+                arrObjO:arr2,
                 messageO:''
               })
-            } 
+              this.showCanvas(oo,'canvas2')
+            }
+           
+            //收入的
+            if(newArrI.length>0){
+                let arr3=ArrUtil.GroupByArr(newArrI,"item_name")
+                let ii=[]
+                for(let i=0;i<arr3.length;i++){          
+                  //count 总数
+                  ii.push({
+                    "name":arr3[i].key,
+                    "data":Math.abs(arr3[i].count) ,
+                    "color":this.color16(),
+                    "sum":arr3[i].sum,
+                    "index":arr3[i].index
+                  })
+                }
+                this.setData({
+                  ii:ii,
+                  arrObjI:arr3,
+                  messageI:''
+                }) 
+                  this.showCanvas(ii,'canvas1')   
+              }                            
         }else{
-          if(item_type=="I"){
-            this.setData({
-              messageI:"没有记账记录~",
-              arrObjI:[]
-            })
-          }else{
-            this.setData({
-              messageO:"没有记账记录~",
-              arrObjO:[]
-            })
-          } 
-        } 
+          console.log("无数据")
+          this.setData({
+            msg:true,
+            arrObjO:null,
+            arrObjI:null
+          })
+        }            
       } 
     })   
   },
@@ -226,10 +245,7 @@ Page({
     return '#' + rs + gs + bs; 
   },
   onReady: function (e) {
-    this.selectDateRang()
-    // if(this.data.arrObjI.length<=0&&this.data.arrObjO.length<=0){
-    //   this.selectDateRang()
-    // }
+    
   },
   onShow:function(){
     var cover=LoginUtil.getOverlayShowStorge()
@@ -240,12 +256,12 @@ Page({
       //加载图表 默认统计当月
       let minDate=dateUtil.formatDate(this.data.minDate) 
       let maxDate=dateUtil.formatDate(this.data.defaultDate)
-      this.callSelectRangDate(minDate,maxDate,'I')   
-      this.callSelectRangDate(minDate,maxDate,'O')   
       this.setData({
         min:minDate,
-        max:maxDate
+        max:maxDate,
+        msg:false
       }) 
+      this.callSelectRangDate(minDate,maxDate)
     }
   },
   onChange(event) {

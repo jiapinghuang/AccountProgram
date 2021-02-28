@@ -99,6 +99,12 @@
         {
           "name": "pages/alllist/alllist",
           "pathName": "pages/alllist/alllist",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "components/rili/rili",
+          "pathName": "components/rili/rili",
           "scene": null
         }
       ]

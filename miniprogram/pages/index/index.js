@@ -47,14 +47,12 @@ Page({
         addDate:parseInt(selectDate) 
       },
       complete: res => {
-        console.log('callFunction test result: ', res)
         this.showDayDetail(res.result.data)
       }
     })
   },
   //展示账本信息
   showDayDetail:function(obj) {
-   // this.calulateMMoney(obj,"d")
    let Isum=0;
    let Osum=0;
     let arr=arrUtil.GroupByArr(obj,"item_name")
@@ -123,15 +121,14 @@ Page({
   onShow: function () {
 
   },
+  onReady:function(){
+
+  },
   onLoginTip:function(){
     Dialog.alert({
       message: '在我的页面授权后，才能使用~',
     }).then(() => {
-      // on close
     });
-  },
-  onReady:function(){
-
   },
   onShow:function(){
     var cover=util.getOverlayShowStorge()

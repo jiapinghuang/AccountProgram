@@ -9,7 +9,6 @@ function GroupByArr(groupArr,column_name){
   let sArr= [...s]
   //2、再分IO
   let arr=[]
- 
   for(let i in sArr)
   {
       var newArr=[]
@@ -26,11 +25,11 @@ function GroupByArr(groupArr,column_name){
         var str=item.addDate +''
          return item.addDate= str.substring(0,4)+'年'+str.substring(4,6)+'月'+str.substring(6,10)+'日'
       })
-    //  console.log(newArr)
       arr.push({"index":i,"key":sArr[i],"value":newArr,"count":count,"sum":sum})
       count=0
       sum=0
-  } 
+  }
+//  console.log("第一手原始数据分类:",arr) 
  return arr
 }
 module.exports={
