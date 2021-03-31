@@ -1,6 +1,6 @@
 <!-- 切换卡 -->
 <view>
-<van-tabs type="card" bind:click="onClick" color="tomato" title-active-color="white">
+<van-tabs type="card" bind:click="onClick" color="#1abc9c" title-active-color="white">
         <van-tab title="收入" >
               <!-- 记账分类   -->
               <van-grid column-num="5" border="{{ false }}">
@@ -31,7 +31,7 @@
               <van-calendar show="{{ show }}" bind:close="onClose" bind:confirm="onConfirm"
               min-date="{{ minDate }}" default-date='{{defaultDate}}' max-date="{{maxDate}}"
               />
-              <van-button color="tomato" type="primary" block bind:click="callAdd">添加</van-button>
+              <van-button color="#1abc9c" type="primary" block bind:click="callAdd">添加</van-button>
         </van-tab>
         <van-tab title="支出">
                <!-- 记账分类   -->

@@ -113,14 +113,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    //  let openid=wx.getStorageSync("openid")
+    //  console.log("openid=",openid)
   },
     /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-
-  },
   onReady:function(){
 
   },

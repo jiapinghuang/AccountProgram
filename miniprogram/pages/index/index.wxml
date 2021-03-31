@@ -55,7 +55,7 @@
 <!-- 新增按钮 -->
 <view class="addIcon"> 
     <navigator class="nav" url="/pages/count/count">
-      <van-icon name="add"  size="50px" color="tomato"></van-icon>
+      <van-icon name="add"  size="50px" color="#1abc9c"></van-icon>
     </navigator>
 </view>
 

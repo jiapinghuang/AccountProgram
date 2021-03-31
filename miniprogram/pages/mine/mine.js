@@ -1,7 +1,6 @@
 // miniprogram/pages/mine/mine.js
 const util=require('../util/checkLogin.js')
 const ArrUtil=require('../util/arrUtil.js')
-const comUtil=require('../util/common.js')
 import Dialog from '/@vant/weapp/dialog/dialog';
 import Toast from '/@vant/weapp/toast/toast';
 Page({
@@ -17,7 +16,7 @@ Page({
     avatarUrl:"",
     activeName:'',//默认关闭
     isLogin:false
-  } ,
+  },
   clickUrl:function(e){
     wx.navigateTo({
       url:"/pages/alllist/alllist",   
@@ -107,6 +106,11 @@ Page({
         console.log('callFunction test result: ', res)
       }
     })
+  },
+  exit:function(){
+    //退出，清除缓存
+    wx.clearStorage()
+    this.onLoad()
   },
   /**
    * 生命周期函数--监听页面加载

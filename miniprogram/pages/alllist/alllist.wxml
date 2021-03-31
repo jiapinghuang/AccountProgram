@@ -1,4 +1,8 @@
 <!-- 数据显示 -->
+<view wx:if="{{accountDetail.length<=0}}">
+    <van-empty  class="custom-image" description="一点东西都没有哦~">
+    </van-empty>
+</view>
 <view class="list"  wx:for="{{accountDetail}}">  
     <view class="item">  
       <view class="list_hd" >
@@ -13,8 +17,4 @@
           <view class="right">{{item.money}}¥</view>
       </view>
     </view>
-</view>
-<view wx:if="{{accountDetail.length<=0}}">
-    <van-empty  class="custom-image" description="一点东西都没有哦~">
-    </van-empty>
 </view>

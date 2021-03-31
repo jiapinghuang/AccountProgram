@@ -15,7 +15,7 @@ Page({
     console.log("opt",options.arr)   
     var data = JSON.parse(options.arr)
     this.setData({
-      dataObj:data
+      dataObj:data.value
     })
   },
 

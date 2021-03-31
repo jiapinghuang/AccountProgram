@@ -4,33 +4,55 @@
 
 <view wx:if="{{!isLogin}}">
     <view class="logo">
-        <image src="../asset/logo.jpg"></image>
-        <view class="userDetail">
-          <van-button type="primary" block wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</van-button>
-        </view> 
+        <image src="../asset/logo.jpg">
+        </image> 
     </view>
-    <view class="content">
-      <view>删除我的所有数据</view>
-      <view>查看所有记帐</view>
+    <view class="userDetail">
+          <van-button round  type="primary" block wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo"  size="normal">授权登录</van-button>
+    </view> 
+    
+    <view class="user_content">
+      <view class="user_main">
+        <view class="main_info_wrap">
+          <view class="app_info_item app_info_contact">
+            <view style="color:rgba(0,0,0,0.2)">删除我的所有数据</view>
+          </view>        
+          <view class="app_info_item">
+            <view style="color:rgba(0,0,0,0.2)">查看所有记帐</view>
+          </view>
+        </view>       
+      </view>
     </view>
 </view>
 
 <view wx:if="{{isLogin}}">
-<view class="header">
-  <view class="logo">
-      <image src="{{avatarUrl}}"></image>
-      <view class="userDetail">
-          <view>{{userName}}</view>
-          <view>{{userCity}}</view>
-      </view> 
-  </view>
+    <view class="header">
+      <view class="logo">
+          <image src="{{avatarUrl}}"></image>
+          <view class="userDetail">
+              <view>{{userName}}</view>
+              <view>{{userCity}}</view>
+          </view> 
+      </view>
+    </view>
+    
+    <view class="user_content">
+      <view class="user_main">
+        <view class="main_info_wrap">             
+          <view class="app_info_item">
+            <view bindtap="clickUrl">查看所有记帐</view>
+          </view>
+          <view class="app_info_item" style="color:red;">
+            <view bindtap="delclick">删除我的所有数据</view>
+          </view>   
+          <!-- <view class="app_info_item" bindtap="exit">            
+              退出小程序
+          </view> -->
+        </view>       
+      </view>
+    </view>
 </view>
 
-<view class="content">
-    <view bindtap="delclick">删除我的所有数据</view>
-    <view bindtap="clickUrl">查看所有记帐</view>
-</view>
-</view>
 
 <van-dialog id="van-dialog" />
 <van-toast id="van-toast" />

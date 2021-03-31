@@ -1,6 +1,26 @@
 //app.js
 App({
   onLaunch: function () {
+        // // 登录
+        // wx.login({
+        //   success: res => {
+        //     // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        //     if(res.code){       
+        //       wx.request({
+        //         url: 'https://api.weixin.qq.com/sns/jscode2session?appid=wx804f9f831841e885&secret=4eee3900721112e5487f313ee60120bf&grant_type=authorization_code&js_code='+res.code,          
+        //         header: {
+        //           'content-type': 'application/json' // 默认值
+        //         },
+        //         success (res) {
+        //           wx.setStorageSync('openid', res.data.openid)
+        //         }                       
+        //       })
+        //     }
+            
+        //   }
+        // })
+
+
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
     } else {
@@ -15,6 +35,7 @@ App({
       })
     }
   },
+  
   globalData: {
     userInfo: null
   }

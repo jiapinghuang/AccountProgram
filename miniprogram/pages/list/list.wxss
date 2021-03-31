@@ -1,27 +1,23 @@
- 
-.account .content{ 
-  margin-left: 40rpx;
-  height: 80rpx;
-  width: 90%;
+
+/**/
+.table{
   text-align: center;
-  line-height: 80rpx;
-  overflow: auto;
-  display: flex;
-  justify-content:space-around;
-  color: rgb(58, 54, 54);
-  font-size: 28rpx;
-  border-top:2rpx solid #e2dede;
-  border-left:2rpx solid #e2dede;
+  padding: 0 15rpx;
   
 }
-.account .content view{
- width: 20%;
- display: inline-block;
- border-right: 2rpx solid #e2dede;
+.t_title{
+  display:flex
 }
-.account .content view:nth-child(2){
-  width: 40%;
+.t_title view{
+  padding: 20rpx 0;
+  flex: 1;
+  background: #1abc9c;
+  color: white;
 }
-.account:last-child .content{
- border-bottom:2rpx solid #e2dede;
+.content .item{
+  display:flex
+}
+.content .item view{
+  padding: 15rpx 0;
+  flex: 1;
 }

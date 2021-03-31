@@ -21,15 +21,15 @@ function GroupByArr(groupArr,column_name){
           sum++
         }      
       })
-      newArr.filter((item)=>{
-        var str=item.addDate +''
-         return item.addDate= str.substring(0,4)+'年'+str.substring(4,6)+'月'+str.substring(6,10)+'日'
-      })
+      // newArr.filter((item)=>{
+      //   var str=item.addDate +'';    
+      //    return item.addDate= str
+      // })
       arr.push({"index":i,"key":sArr[i],"value":newArr,"count":count,"sum":sum})
       count=0
       sum=0
   }
-//  console.log("第一手原始数据分类:",arr) 
+ //console.log("第一手原始数据分类:",arr) 
  return arr
 }
 module.exports={

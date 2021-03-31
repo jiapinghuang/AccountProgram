@@ -44,7 +44,7 @@
   },
   "appid": "wx804f9f831841e885",
   "projectname": "AccountProgram",
-  "libVersion": "2.14.3",
+  "libVersion": "2.16.0",
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "cloudfunctionTemplateRoot": "cloudfunctionTemplate",

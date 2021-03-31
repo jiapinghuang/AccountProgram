@@ -70,17 +70,17 @@
 <canvas canvas-id="canvas1" class="canvas {{riliShow && canShow ? '':' canvasBox'}}" wx:if="{{arrObjI.length>0}}"></canvas>
 <!-- 收入情况 -->
 <van-tabs type="card" wx:if="{{arrObjI.length>0 || arrObjO.length>0 }}"  bind:click="clickIO"
- color="tomato" title-active-color="white">
+  color="#1abc9c" title-active-color="white">
         <van-tab title="收入" wx:if="{{arrObjI.length>0}}">   
             <view class="account" wx:for="{{arrObjI}}" bindtap="clickUrl" data-obj="{{item}}">
-                {{item.key}}
+                <text style="color:tomato;font-weight: bold;">{{item.key}}</text>
                 <view>总金额:{{item.count}}¥</view> 
                 <view>总笔数:{{item.sum}}</view>       
             </view>             
         </van-tab>
         <van-tab title="支出" wx:if="{{arrObjO.length>0}}">
             <view class="account" wx:for="{{arrObjO}}" bindtap="clickUrl" data-obj="{{item}}">
-                {{item.key}}
+                  <text style="color:tomato;font-weight: bold;">{{item.key}}</text>
                   <view>总金额:{{item.count}}¥</view> 
                   <view>总笔数:{{item.sum}}</view>
             </view>        

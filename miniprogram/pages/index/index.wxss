@@ -14,7 +14,7 @@
 }
 
 .header{
-  background-color: rgb(241,86,66);
+  background-color: #1abc9c;
   color: white;
   width: 100%;
   /* border-radius: 25rpx; */
@@ -35,7 +35,7 @@
 
 /*本月支出收入样式**/
 .header_bd{
-  height: 200rpx;
+  height: 180rpx;
   margin: 0 auto;
   overflow: hidden;
   padding-top: 60rpx;
@@ -44,10 +44,12 @@
   justify-content: space-around;
 }
 .header_bd .item{
-  padding: 0 123rpx;
+  padding: 0 110rpx;
   display: block;
   text-align: center;
   margin-bottom: 30rpx;
+}
+.header_bd .item:first-child{
   border-right: 2rpx solid whitesmoke;
 }
 .item .item_time{
@@ -67,12 +69,12 @@
 }
 .search_date{
   border-radius: 40rpx;
-  background-color: tomato;
+  background-color: #f1c40f;
   margin-left: 30rpx;
 }
 .search_money{
   border-radius: 40rpx;
-  background-color: #fd9a59;
+  background-color: #f1c40f;
 }
 .search view image{
   width: 80rpx;
@@ -93,19 +95,23 @@
 .item .list_hd{
   height: 60rpx;
   line-height: 60rpx;
-  color:#009999;
+  color:#1abc9c;
   font-size: 32rpx;
   font-weight: bold;
   display: flex;
   justify-content: space-between;
-  padding: 0 40rpx;
+  padding: 15px 40rpx;
   border-top:2rpx solid #e2dede;
   border-left:2rpx solid #e2dede;
 }
+.item .list_hd .title{
+  
+}
 .item .list_bd{
   display: flex;
-  padding: 0 40rpx;
+  padding: 10rpx 40rpx;
   height: 50rpx;
+  font-size: 28rpx;
   line-height: 50rpx;
   justify-content: space-between;
   border-top:2rpx solid #e2dede;

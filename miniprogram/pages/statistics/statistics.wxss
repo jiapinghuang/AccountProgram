@@ -131,17 +131,20 @@
 
  .account{ 
     margin-left: 40rpx;
+    margin-top: 10rpx;
     height: 80rpx;
     width: 90%;
-    /* box-shadow: 2rpx 2rpx 2rpx rgba(26, 6, 6, 0.281); */
     line-height: 80rpx;
     overflow: auto;
     display: flex;
     justify-content:space-around;
     color: rgb(58, 54, 54);
     font-size: 28rpx;
+    padding: 15rpx 0;
+    border-bottom:1rpx solid rgb(221, 219, 219);
  }
  .account view{
    width: auto;
    display: inline-block;
+   
  }

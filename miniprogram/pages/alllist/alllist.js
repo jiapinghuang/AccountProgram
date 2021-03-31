@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    accountDetail:[]//总账本信息
+    //accountDetail:[]//总账本信息
   },
   callselectAll:function(){
     wx.cloud.callFunction({

@@ -13,5 +13,5 @@
     bind:change="onItemDescChange"
   />
 </van-cell-group>
-<van-button type="primary" block bind:click="callAdd">添加</van-button>
+<van-button type="primary" color="#1abc9c" block bind:click="callAdd">添加</van-button>
 <van-notify id="van-notify" />

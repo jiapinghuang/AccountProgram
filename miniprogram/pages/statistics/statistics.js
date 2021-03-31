@@ -21,7 +21,7 @@ Page({
     activeNames: ['1'], //折叠面板参数
     overlayShow:true,
     //日历组件数据
-    years:[year-1,year-2,year-3,year-4],
+    years:[year,year-1,year-2],
     months:['1','2','3','4','5','6','7','8','9','10','11','12'],
     tempMinyear:year,//临时年
     tempMinmon:month, //临时月
@@ -53,9 +53,10 @@ Page({
   },
   clickUrl:function(e){
     var data=e.currentTarget.dataset.obj
+    console.log(data)
     //跳转带参
     wx.navigateTo({
-      url:"/pages/list/list?arr="+JSON.stringify(data.detail),   
+      url:"/pages/list/list?arr="+JSON.stringify(data),   
     })
   },
   //自定义日历组件

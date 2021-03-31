@@ -1,11 +1,17 @@
-<!-- <view> -->
-  <view wx:for="{{dataObj}}"  class="account">
-    <view class="content">
-        <view> {{index+1}}</view>
-        <view> {{item.addDate}}</view>
-        <view> {{item.money}}¥</view>
-        <view> {{item.desc}}</view>
-    </view>
-   </view>
-<!-- </view> -->
 
+<view class="table" wx:if="{{dataObj}}" >
+        <view class="t_title">   
+          <view> 序号</view>
+          <view> 日期</view>
+          <view> 金额</view>
+          <view> 备注</view>
+        </view>
+        <view class="content" wx:for="{{dataObj}}" >
+          <view class="item">   
+            <view> {{index+1}}</view>
+            <view> {{item.addDate}}</view>
+            <view> {{item.money}}¥</view>
+            <view> {{item.desc}}</view>
+          </view> 
+        </view>         
+</view>
