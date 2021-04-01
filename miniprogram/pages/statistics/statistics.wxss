@@ -1,9 +1,26 @@
 /* miniprogram/pages/statistics/statistics.wxss */
+page{
+  display: flex;
+  flex-direction: column;
+}
 .mycontainer {
    padding: 30rpx 0rpx;
    box-sizing: border-box;
-} 
+}
 .canvasBox{
+  margin-top: 30rpx;
+}
+.bheight{
+  margin-top: 90rpx;
+}
+.hiddenCanvas{
+  position: relative;
+  width: 100%;
+  right: -900rpx;
+  top: -600rpx;
+  height: 500rpx;
+}
+.removeCanvas{
   position: absolute;
   width: 100%;
   right: -900rpx;
@@ -12,11 +29,12 @@
 .canvas {
   width: 250px;
   height: 250px;
-  margin: 0 auto;
+  margin: 20rpx auto;
   transform: scale(1);
   display: flex;
+  margin-top: 40rpx;
+  
 }
-
 .message{
   color: #999;
   margin-left: 80rpx;
@@ -108,23 +126,32 @@
   top: 40rpx;
   left: 40rpx;
   font-size: 30rpx;
+  height: 80rpx;
+  padding: 40rpx 0;
+  border-bottom: 2rpx solid rgb(56, 52, 52,0.1);
 }
+
  .riliContent image{
-    width: 50rpx;
-    height: 50rpx;
+    width: 80rpx;
+    height: 80rpx;
     display: inline-block;
     /* margin-left: 40rpx; */
  }
  .riliContent {
-   line-height: 50rpx;
-   margin-left: 10rpx;
+   text-align: center;
+   line-height: 80rpx;
+   display: flex;
  }
 .riliContent button{
   width: auto;
-  height: 50rpx;
-  line-height: 50rpx;
+  height: 80rpx;
+  padding-top: 0 20rpx;
+  line-height: 80rpx;
   background-color: white;
-  font-size: 28rpx;
+  font-size: 30rpx;
+  margin-left: 20rpx;
+  background-color:#1abc9c ;
+  color: white;
  }
 
  /* 支出收入样式 */

@@ -118,39 +118,45 @@ Page({
     var that=this.data.obj
     that.item_name=this.data.item_name
     that.item_type=this.data.item_type
-    if(that.item_type==='O'){
-      that.money='-'+that.money
-      that.item_name=this.data.item_name || this.data.Olist[0].type
-    }else{
-      that.item_name=this.data.item_name || this.data.Ilist[0].type
-    }
-    if(!that.item_name||!that.money||!that.addDate){
+
+    var num=/^[1-9]\d*(\.\d{1,2})?$|^0+(\.\d{1,2})?$/;
+    var isnum=num.test(that.money)
+    
+    if(isnum){
+      if(that.item_type==='O'){
+        that.money='-'+that.money
+        that.item_name=this.data.item_name || this.data.Olist[0].type
+      }else{
+        that.item_name=this.data.item_name || this.data.Ilist[0].type
+      }
+    }  
+    if(!that.item_name||!that.money||!that.addDate&&isnum){
         Dialog.alert({
           title: '注意',
-          message: '金额、类目、日期不能为空值！',
+          message: '金额、类目、日期不能为空值！且金额只能为数字',
         }).then(() => {
           // on close
         });
     }else{
       try{
-        wx.cloud.callFunction({
-          // 云函数名称
-          name: 'add',
-          // 传给云函数的参数
-          data: that,
-          complete: res => {
-             this.setData({
-               obj:{},
-               addDate:""
-             })
-            if(res.result._id){
-               //回到上一页
-              wx.navigateBack({
-                  delta: 1
-              })
-            }                   
-          }
-        })
+        // wx.cloud.callFunction({
+        //   // 云函数名称
+        //   name: 'add',
+        //   // 传给云函数的参数
+        //   data: that,
+        //   complete: res => {
+        //      this.setData({
+        //        obj:{},
+        //        addDate:""
+        //      })
+        //     if(res.result._id){
+        //        //回到上一页
+        //       wx.navigateBack({
+        //           delta: 1
+        //       })
+        //     }                   
+        //   }
+        // })
       }catch(err){
           Notify({ type: 'danger', message: '添加失败，请联系管理员' })
       }

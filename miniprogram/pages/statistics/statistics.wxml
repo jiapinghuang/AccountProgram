@@ -1,91 +1,105 @@
-<van-dialog
-  use-slot
-  title="日历"
-  show="{{showMinRili}}"
-  show-cancel-button
-  confirm-button-open-type="comfirmMinFun"
-  bind:confirm="comfirmMinFun"
-  bind:close="onMyMinClose"
->
-  <view class="rili">
-    <view class="year">
-      <view wx:for="{{years}}" data-year="{{item}}" data-index="{{index}}" bindtap="clickMinYear" 
-        class="{{ tempMinIndex ==index?'actives':'unactives'}}">
-        {{item}} 
-      </view>   
+
+  <van-dialog
+    use-slot
+    title="日历"
+    show="{{showMinRili}}"
+    show-cancel-button
+    confirm-button-open-type="comfirmMinFun"
+    bind:confirm="comfirmMinFun"
+    bind:close="onMyMinClose"
+  >
+    <view class="rili">
+      <view class="year">
+        <view wx:for="{{years}}" data-year="{{item}}" data-index="{{index}}" bindtap="clickMinYear" 
+          class="{{ tempMinIndex ==index?'actives':'unactives'}}">
+          {{item}} 
+        </view>   
+      </view>
+      <view class="month">
+        <view wx:for="{{months}}" class="{{ tempMinmon -1 ==index?'actives':'unactives'}}" data-mon="{{item}}" bindtap="clickMinMon"> {{item}}</view>
+      </view>
     </view>
-    <view class="month">
-      <view wx:for="{{months}}" class="{{ tempMinmon -1 ==index?'actives':'unactives'}}" data-mon="{{item}}" bindtap="clickMinMon"> {{item}}</view>
+  </van-dialog>
+  <van-dialog
+    use-slot
+    title="日历"
+    show="{{showMaxRili}}"
+    show-cancel-button
+    confirm-button-open-type="comfirmMaxFun"
+    bind:confirm="comfirmMaxFun"
+    bind:close="onMyMaxClose"
+  >
+    <view class="rili">
+      <view class="year">
+        <view wx:for="{{years}}" data-year="{{item}}" data-index="{{index}}" bindtap="clickMaxYear" 
+          class="{{ tempMaxIndex ==index?'actives':'unactives'}}">
+          {{item}} 
+        </view>   
+      </view>
+      <view class="month">
+        <view wx:for="{{months}}" class="{{ temMaxmon -1 ==index?'actives':'unactives'}}" data-mon="{{item}}" bindtap="clickMaxMon"> {{item}}</view>
+      </view>
     </view>
-  </view>
-</van-dialog>
-<van-dialog
-  use-slot
-  title="日历"
-  show="{{showMaxRili}}"
-  show-cancel-button
-  confirm-button-open-type="comfirmMaxFun"
-  bind:confirm="comfirmMaxFun"
-  bind:close="onMyMaxClose"
->
-  <view class="rili">
-    <view class="year">
-      <view wx:for="{{years}}" data-year="{{item}}" data-index="{{index}}" bindtap="clickMaxYear" 
-        class="{{ tempMaxIndex ==index?'actives':'unactives'}}">
-        {{item}} 
-      </view>   
-    </view>
-    <view class="month">
-      <view wx:for="{{months}}" class="{{ temMaxmon -1 ==index?'actives':'unactives'}}" data-mon="{{item}}" bindtap="clickMaxMon"> {{item}}</view>
-    </view>
-  </view>
-</van-dialog>
+  </van-dialog>
 
 <view class="Content">
-    <view class="riliContent" bindtap="showRiliMinDialog"><image src="../asset/search.png"></image></view>
-    <view class="riliContent">
-          {{confirmMinYear}}年
-    </view>
-    <view class="riliContent">
-          {{confirmMinMon}}月
-    </view>
-    <view class="riliContent">到</view>
+    <view class="riliContent" bindtap="showRiliMinDialog">
+      <view class="riliContent"><image src="../asset/search.png"></image></view>
+      <view class="riliContent">
+            {{confirmMinYear}}年
+      </view>
+      <view class="riliContent">
+            {{confirmMinMon}}月
+      </view>
+    </view>  
+    <view class="riliContent">~</view>
     <view class="riliContent" bindtap="showRiliMaxDialog">
-      <image src="../asset/search.png"></image>
+          <view class="riliContent">
+            <image src="../asset/search.png"></image>
+          </view>
+          <view class="riliContent">
+                {{confirmMaxYear}}年
+          </view>
+          <view class="riliContent">
+                {{confirmMaxMon}}月
+          </view>
     </view>
-    <view class="riliContent">
-          {{confirmMaxYear}}年
-    </view>
-    <view class="riliContent">
-          {{confirmMaxMon}}月
-    </view>
-    <view class="riliContent"><button bindtap="selectDateRang" >查询</button></view>
+    <view class="riliContent"><button bindtap="selectDateRangBtn" >查询</button></view>
 </view>
-
 <view class="message">
   <van-empty wx:if="{{msg}}"class="custom-image" description="一点东西都没有哦~">
   </van-empty>
 </view>
-<canvas canvas-id="canvas2" class="canvas {{riliShow && canShow ?'canvasBox':''}}" wx:if="{{arrObjO.length>0}}"></canvas>
-<canvas canvas-id="canvas1" class="canvas {{riliShow && canShow ? '':' canvasBox'}}" wx:if="{{arrObjI.length>0}}"></canvas>
+<view class="{{hiddenCanvas}} bheight">
+    <canvas canvas-id="canvas2" class="canvas {{Canvas2}}" wx:if="{{arrObjO.length>0}}"></canvas>
+    <canvas canvas-id="canvas1" class="canvas  {{Canvas1}}" wx:if="{{arrObjI.length>0}}"></canvas>
+</view>  
+
+
 <!-- 收入情况 -->
-<van-tabs type="card" wx:if="{{arrObjI.length>0 || arrObjO.length>0 }}"  bind:click="clickIO"
-  color="#1abc9c" title-active-color="white">
-        <van-tab title="收入" wx:if="{{arrObjI.length>0}}">   
-            <view class="account" wx:for="{{arrObjI}}" bindtap="clickUrl" data-obj="{{item}}">
-                <text style="color:tomato;font-weight: bold;">{{item.key}}</text>
-                <view>总金额:{{item.count}}¥</view> 
-                <view>总笔数:{{item.sum}}</view>       
-            </view>             
-        </van-tab>
-        <van-tab title="支出" wx:if="{{arrObjO.length>0}}">
-            <view class="account" wx:for="{{arrObjO}}" bindtap="clickUrl" data-obj="{{item}}">
+
+  <van-tabs type="card" wx:if="{{arrObjI.length>0 || arrObjO.length>0 }}"  bind:click="clickIO"
+    color="#1abc9c" title-active-color="white">
+          <van-tab title="收入" wx:if="{{arrObjI.length>0}}">   
+              <view class="account" wx:for="{{arrObjI}}" bindtap="clickUrl" data-obj="{{item}}">
                   <text style="color:tomato;font-weight: bold;">{{item.key}}</text>
                   <view>总金额:{{item.count}}¥</view> 
-                  <view>总笔数:{{item.sum}}</view>
-            </view>        
-        </van-tab>
-</van-tabs>
+                  <view>总笔数:{{item.sum}}</view>       
+              </view>             
+          </van-tab>
+          <van-tab title="支出" wx:if="{{arrObjO.length>0}}">
+              <view class="account" wx:for="{{arrObjO}}" bindtap="clickUrl" data-obj="{{item}}">
+                    <text style="color:tomato;font-weight: bold;">{{item.key}}</text>
+                    <view>总金额:{{item.count}}¥</view> 
+                    <view>总笔数:{{item.sum}}</view>
+              </view>        
+          </van-tab>
+  </van-tabs>
+
+  <view wx:if="{{showSearch}}">
+    <van-empty image="search" description="请查询" />
+  </view>
+ 
 
 <van-dialog id="van-dialog" />
 <view class="{{overlayShow ? 'mask':'dd'}}" bindtap="onLoginTip"></view>

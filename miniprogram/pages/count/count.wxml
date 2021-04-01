@@ -62,7 +62,7 @@
               <van-calendar show="{{ show }}" bind:close="onClose" bind:confirm="onConfirm"
               min-date="{{ minDate }}" default-date='{{defaultDate}}' max-date="{{maxDate}}"
               />
-              <van-button color="tomato" type="primary" block bind:click="callAdd">添加</van-button>     
+              <van-button color="#1abc9c" type="primary" block bind:click="callAdd">添加</van-button>     
         </van-tab>
 </van-tabs>
 <van-notify id="van-notify" />

@@ -9,11 +9,10 @@ const year = date.getFullYear();
 const month = date.getMonth()+1;
 Page({
   data: {
+    showSearch:true,//显示搜索空状态
+    hiddenCanvas:" ",//一开始显示图表
+    Canvas2:"removeCanvas",
     showDate: '',
-    //show: false,
-    riliShow:true,//显示日历时，将canvas移到画布外
-    canShow:true,
-    msg:false,
     arrObjI:[], //时间段数据
     arrObjO:[],
     minDate:dateUtil.getMinDate(year,month),
@@ -40,13 +39,15 @@ Page({
     if(e.detail.index===0){
       //显示收入图表
       this.setData({
-        canShow:true
+        Canvas1:"removeCanvas",
+        Canvas2:' '
       })
       this.showCanvas(this.data.ii,'canvas1')
     }else{
       //显示支出图表   
       this.setData({   
-        canShow:false
+        Canvas1:' ',
+        Canvas2:'removeCanvas'
       })
       this.showCanvas(this.data.oo,'canvas2')
     }
@@ -72,7 +73,18 @@ Page({
     })
   },
   onMyMinClose() {
-    this.setData({ riliShow:true});
+    //关闭日历弹窗，隐藏日历，显示canvas
+    this.setData({ 
+      showMinRili:false,
+      removeCanvasOne:false,
+      //hiddenCanvas:""
+    });
+    var that=this
+    setTimeout(function(){
+      that.setData({ 
+        hiddenCanvas:""
+      })
+    },100)
   },
   comfirmMinFun(){
     //将临时year mon 存储到正式区
@@ -83,8 +95,9 @@ Page({
     //查询
   },
   showRiliMinDialog(){
-    //显示日历控件
-    this.setData({ showMinRili: true ,riliShow:false});
+    //显示日历控件，移除画布
+    this.setData({ showMinRili: true ,removeCanvasOne:true,hiddenCanvas:"hiddenCanvas"});
+    
   },
   //自定义日历组件2
   clickMaxYear(event){
@@ -99,7 +112,13 @@ Page({
     })
   },
   onMyMaxClose() {
-   this.setData({ showMaxRili: false ,riliShow:true});
+   this.setData({ showMaxRili: false });
+   var that=this
+   setTimeout(function(){
+     that.setData({ 
+       hiddenCanvas:""
+     })
+   },100)
   },
   comfirmMaxFun(){
     //将临时year mon 存储到正式区
@@ -111,9 +130,12 @@ Page({
   },
   showRiliMaxDialog(){
     //显示日历控件
-    this.setData({ showMaxRili: true ,riliShow:false});
+    this.setData({ showMaxRili: true ,hiddenCanvas:"hiddenCanvas"});
   },
-  selectDateRang(){
+  selectDateRangBtn(){
+    this.setData({
+      showSearch:false
+    })
     //区间查找数据
     let miny=this.data.confirmMinYear
     let minm=dateUtil.changeNum(this.data.confirmMinMon)
@@ -196,13 +218,13 @@ Page({
                 })
               }
               this.setData({
+                msg:false,
                 oo:oo,
                 arrObjO:arr2,
                 messageO:''
               })
               this.showCanvas(oo,'canvas2')
-            }
-           
+            }         
             //收入的
             if(newArrI.length>0){
                 let arr3=ArrUtil.GroupByArr(newArrI,"item_name")
@@ -219,6 +241,7 @@ Page({
                 }
                 this.setData({
                   ii:ii,
+                  msg:false,                
                   arrObjI:arr3,
                   messageI:''
                 }) 
@@ -255,14 +278,14 @@ Page({
         overlayShow:false
       })
       //加载图表 默认统计当月
-      let minDate=dateUtil.formatDate(this.data.minDate) 
-      let maxDate=dateUtil.formatDate(this.data.defaultDate)
-      this.setData({
-        min:minDate,
-        max:maxDate,
-        msg:false
-      }) 
-      this.callSelectRangDate(minDate,maxDate)
+      // let minDate=dateUtil.formatDate(this.data.minDate) 
+      // let maxDate=dateUtil.formatDate(this.data.defaultDate)
+      // this.setData({
+      //   min:minDate,
+      //   max:maxDate,
+      //   msg:false
+      // }) 
+     // this.callSelectRangDate(minDate,maxDate)
     }
   },
   onChange(event) {
