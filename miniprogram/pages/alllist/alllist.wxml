@@ -3,6 +3,7 @@
     <van-empty  class="custom-image" description="一点东西都没有哦~">
     </van-empty>
 </view>
+
 <view class="list"  wx:for="{{accountDetail}}">  
     <view class="item">  
       <view class="list_hd" >

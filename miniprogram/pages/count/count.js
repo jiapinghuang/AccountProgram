@@ -139,24 +139,24 @@ Page({
         });
     }else{
       try{
-        // wx.cloud.callFunction({
-        //   // 云函数名称
-        //   name: 'add',
-        //   // 传给云函数的参数
-        //   data: that,
-        //   complete: res => {
-        //      this.setData({
-        //        obj:{},
-        //        addDate:""
-        //      })
-        //     if(res.result._id){
-        //        //回到上一页
-        //       wx.navigateBack({
-        //           delta: 1
-        //       })
-        //     }                   
-        //   }
-        // })
+        wx.cloud.callFunction({
+          // 云函数名称
+          name: 'add',
+          // 传给云函数的参数
+          data: that,
+          complete: res => {
+             this.setData({
+               obj:{},
+               addDate:""
+             })
+            if(res.result._id){
+               //回到上一页
+              wx.navigateBack({
+                  delta: 1
+              })
+            }                   
+          }
+        })
       }catch(err){
           Notify({ type: 'danger', message: '添加失败，请联系管理员' })
       }
