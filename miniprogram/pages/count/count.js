@@ -114,14 +114,11 @@ Page({
   },
   //新增方法
   callAdd:function(){
-   // console.log(this.data.obj)
     var that=this.data.obj
     that.item_name=this.data.item_name
     that.item_type=this.data.item_type
-
     var num=/^[1-9]\d*(\.\d{1,2})?$|^0+(\.\d{1,2})?$/;
     var isnum=num.test(that.money)
-    
     if(isnum){
       if(that.item_type==='O'){
         that.money='-'+that.money
